@@ -1,0 +1,9 @@
+.hero-unit i {
+  font-size: 13em;
+  float: left;
+  margin-right: 50px;
+}
+.hero-unit h1 {
+  font-size: 7em;
+  margin-bottom: 30px;
+}

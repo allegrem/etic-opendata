@@ -16,7 +16,7 @@ module.exports = (grunt) ->
     watch:
       less:
         files: ['<%= meta.dev.csspath %>*.less']
-        tasks: ['less:dev']
+        tasks: ['less']
       coffee:
         files: ['<%= meta.dev.jspath %>*.coffee']
         tasks: ['coffee']
