@@ -35,20 +35,28 @@
   font-size: 20em;
   margin-right: 50px;
 }
-#frame00 .btn {
-  background-color: #1abc9c;
-}
 #frame05 {
   color: #16a085;
 }
 #frame10 {
+  background-color: #9b59b6;
+  color: #ecf0f1;
+}
+#frame15 {
+  color: #9b59b6;
+}
+#frame20 {
+  background-color: #c0392b;
+  color: #ecf0f1;
+}
+#frame25 {
+  color: #c0392b;
+}
+#frame30 {
   background-color: #e67e22;
   color: #ecf0f1;
 }
-#frame10 .btn {
-  background-color: #f39c12;
-}
-#frame15 {
+#frame35 {
   color: #e67e22;
 }
 footer {
