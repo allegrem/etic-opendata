@@ -1,9 +1,34 @@
-.hero-unit i {
+.btn i {
+  margin-right: 6px;
+}
+.frame {
+  margin: 0;
+  padding: 80px;
+  padding-left: 18%;
+  padding-right: 18%;
+}
+.frame h1 {
+  font-size: 7em;
+  margin-bottom: 0.8em;
+}
+.frame .main-icon {
   font-size: 13em;
   float: left;
   margin-right: 50px;
 }
-.hero-unit h1 {
-  font-size: 7em;
-  margin-bottom: 30px;
+.frame p {
+  font-size: 1.5em;
+  line-height: 2em;
+}
+#frame1 {
+  background-color: #16a085;
+  color: #ecf0f1;
+}
+#frame1 h1 {
+  font-size: 10em;
+  margin-top: 0.5em;
+}
+#frame1 .main-icon {
+  font-size: 20em;
+  margin-right: 50px;
 }
