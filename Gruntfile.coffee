@@ -38,12 +38,8 @@ module.exports = (grunt) ->
       options:
         paths: '<%= meta.dev.csspath %>'
       files: 
-        expand: true
-        cwd: '<%= meta.dev.csspath %>'
-        src: ['*.less']
-        dest: '<%= meta.dev.csspath %>'
-        ext: '.css'
-      
+        src: '<%= meta.dev.csspath %><%= pkg.name %>.less'
+        dest: '<%= meta.dev.csspath %><%= pkg.name %>.css'
 
     cssmin:
       dist:
