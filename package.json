@@ -1,15 +1,25 @@
 {
   "name": "etic-opendata",
   "version": "0.0.0",
-  "description": "Site Web presentant la controverse sur l'Open Data en France",
-  "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Site Web présentant la controverse sur l'Open Data en France",
+  "homepage": "",
+  "bugs": "https://github.com/allegrem/etic-opendata/issues",
+  "author": "Matthieu Allegre",
+  "license": "BSD",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/allegrem/etic-opendata.git"
   },
-  "author": "Matthieu Allegre",
-  "license": "BSD"
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.4.2",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-less": "~0.5.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.6.0",
+    "grunt-targethtml": "~0.2.2"
+  }
 }
