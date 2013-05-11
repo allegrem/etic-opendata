@@ -10,6 +10,7 @@ module.exports = (grunt) ->
         jspath: 'js/'
         csspath: 'css/'
         imgpath: 'img/'
+        fontpath: 'font/'
       banner: '/*! <%= pkg.name %> v<%= pkg.version %> | <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 
     watch:
@@ -64,6 +65,14 @@ module.exports = (grunt) ->
           cwd: '<%= meta.dev.imgpath %>'
           src: ['*']
           dest: '<%= meta.dist.path %><%= meta.dev.imgpath %>'
+          filter: 'isFile'
+        ]
+      fonts:
+        files: [
+          expand: true
+          cwd: '<%= meta.dev.fontpath %>'
+          src: ['*']
+          dest: '<%= meta.dist.path %><%= meta.dev.fontpath %>'
           filter: 'isFile'
         ]
       static: 
