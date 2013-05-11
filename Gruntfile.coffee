@@ -5,6 +5,7 @@ module.exports = (grunt) ->
     meta:
       dist:
         path: 'dist/'
+        jspath: '<%= meta.dist.path %>js/'
       dev: 
         jspath: 'js/'
         csspath: 'css/'
@@ -21,8 +22,8 @@ module.exports = (grunt) ->
 
     coffee:
       files:
-        src: '<%= meta.dev.jspath %><%= pkg.name %>.js'
-        dest: '<%= meta.dev.jspath %><%= pkg.name %>.coffee'
+        src: '<%= meta.dev.jspath %><%= pkg.name %>.coffee'
+        dest: '<%= meta.dev.jspath %><%= pkg.name %>.js'
 
     uglify: 
       dist: 
@@ -30,7 +31,7 @@ module.exports = (grunt) ->
           banner: '<%= meta.banner %>'
           report: 'min'
         files:
-          '<%= meta.dist.path %><%= pkg.name %>.min.js': ['<%= meta.dev.jspath %>*.js']
+          '<%= meta.dist.jspath %><%= pkg.name %>.min.js': ['<%= coffee.files.dest %>']
 
     less:
       options:
@@ -53,7 +54,8 @@ module.exports = (grunt) ->
 
     targethtml:
       dist:
-          '<%= meta.dist.path %>index.html': 'index.html'
+        files:
+          '<%= meta.dist.path %>index.html': ['index.html']
 
     copy:
       img:
@@ -69,6 +71,13 @@ module.exports = (grunt) ->
           expand: true
           src: ['humans.txt', '404.html']
           dest: '<%= meta.dist.path %>'
+        ]
+      vendorJs:
+        files: [
+          expand: true
+          cwd: '<%= meta.dev.jspath %>'
+          src: ['*.min.js']
+          dest: '<%= meta.dist.jspath %>'
         ]
 
     clean:

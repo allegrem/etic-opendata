@@ -1,7 +1,7 @@
 {
   "name": "etic-opendata",
   "version": "0.0.0",
-  "description": "Site Web présentant la controverse sur l'Open Data en France",
+  "description": "Site Web réalisé dans le cadre du projet ETIC de Télécom ParisTech et présentant la controverse sur l'Open Data en France.",
   "homepage": "",
   "bugs": "https://github.com/allegrem/etic-opendata/issues",
   "author": "Matthieu Allegre",
