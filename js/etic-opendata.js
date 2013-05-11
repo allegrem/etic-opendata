@@ -1,13 +1,13 @@
 (function() {
   var activateNavItem, hideLabels, label, labelInitialWidth, nav, offset05, offset10, offset20, offset30, showLabels;
 
-  offset05 = $('#frame05').offset().top;
+  offset05 = $('#frame05').offset().top - 5;
 
-  offset10 = $('#frame10').offset().top;
+  offset10 = $('#frame10').offset().top - 5;
 
-  offset20 = $('#frame20').offset().top;
+  offset20 = $('#frame20').offset().top - 5;
 
-  offset30 = $('#frame30').offset().top;
+  offset30 = $('#frame30').offset().top - 5;
 
   nav = $('nav');
 

@@ -1,10 +1,10 @@
 # Cache some values
-offset05 = $('#frame05').offset().top
-offset10 = $('#frame10').offset().top
-offset20 = $('#frame20').offset().top
-offset30 = $('#frame30').offset().top
+offset05 = $('#frame05').offset().top - 5 # the '-5' is a security margin
+offset10 = $('#frame10').offset().top - 5
+offset20 = $('#frame20').offset().top - 5
+offset30 = $('#frame30').offset().top - 5
 nav = $('nav')
-labelInitialWidth = Math.max.apply Math, ($(label).width() for label in nav.find('span'))
+labelInitialWidth = Math.max.apply Math, ($(label).width() for label in nav.find('span')) # compute the max width of all the labels
 
 # Hide the nav menu on start
 nav.css('left', "-#{nav.width()+10}px").addClass('hidden')
