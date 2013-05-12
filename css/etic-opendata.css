@@ -87,10 +87,7 @@ nav ul li.selected a {
 }
 .frame .main-icon {
   font-size: 13em;
-  float: left;
-  margin-right: 50px;
-}
-.frame .main-icon.opposite-side {
+  margin-left: 50px;
   float: right;
 }
 .frame p {
@@ -107,6 +104,8 @@ nav ul li.selected a {
 #frame00 .main-icon {
   font-size: 20em;
   margin-right: 50px;
+  float: left;
+  margin-left: 0px;
 }
 #frame05 {
   color: #16a085;
