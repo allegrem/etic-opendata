@@ -1,38 +1,102 @@
-# Cache some values
-offset05 = $('#frame05').offset().top - 5 # the '-5' is a security margin
-offset10 = $('#frame10').offset().top - 5
-offset20 = $('#frame20').offset().top - 5
-offset30 = $('#frame30').offset().top - 5
-nav = $('nav')
-labelInitialWidth = Math.max.apply Math, ($(label).width() for label in nav.find('span')) # compute the max width of all the labels
-
-# Hide the nav menu on start
-nav.css('left', "-#{nav.width()+10}px").addClass('hidden')
+###########################################################################################
+#										NAV MENUS
+###########################################################################################
 
 # Smooth scroll
-$('nav li').click (e) ->
+smoothScrollTo = (e, callback) -> $('html, body').stop().animate(scrollTop: $(e).offset().top, 1000, callback)
+$('nav li, a.scroll-to').click (e) ->
 	e.preventDefault()
-	$('html, body').stop().animate scrollTop: $($(this).find('a').attr('href')).offset().top, 1000
+	target = $(this).attr('href') ? $(this).find('a').attr('href')
+	smoothScrollTo(target)
 
 # Activate the given menu item
 activateNavItem = (anchor) -> 
 	$('nav li').removeClass 'selected'
 	$("nav a[href=#{anchor}]").parent().addClass 'selected'
 
-# Show/Hide lables in the nav menu
+
+
+###########################################################################################
+#										MAIN NAV
+###########################################################################################
+
+# Hide the main nav menu on start
+mainNav = $('nav.main-nav')
+mainNav.css('left', "-#{mainNav.width()+10}px").addClass('hidden')
+
+# Show/Hide lables in the main nav menu
+labelInitialWidth = Math.max.apply Math, ($(label).width() for label in mainNav.find('span')) # compute the max width of all the labels
 showLabels = () -> 
-	nav.find('span').stop()
+	mainNav.find('span').stop()
 		.css('margin-left', "7px")
-		.animate(width: labelInitialWidth+7, 700)
+		.animate(width: labelInitialWidth+7, 500)
 hideLabels = () -> 
-	nav.find('span').stop()
+	mainNav.find('span').stop()
 		.animate(width: '0px', 700, () -> $(this).css('margin-left', '0px'))
-nav.mouseenter showLabels
-nav.mouseleave hideLabels
-	
-# On scroll, update the active item in the nav menu and once per load show the nav menu
+mainNav.mouseenter showLabels
+mainNav.mouseleave hideLabels
+
+
+
+###########################################################################################
+#										TIMELINE
+###########################################################################################
+
+# Cache some values
+tl = $('.timeline')
+allDetails = tl.children('p')
+
+# Hide and show details (take the 'p' elements !!)
+hideDetails = (elements = allDetails, hide = false) -> 
+	$(elements).each (i, el) ->
+		e = $(el)
+		if hide then e.hide() else e.stop().slideUp()
+		e.prev().addClass('hidden')
+showDetails = (elements = allDetails) ->
+	$(elements).each (i, el) -> $(el).stop().slideDown().prev().removeClass('hidden')
+
+# Show details on click
+tl.find('h3').click (e) -> 
+	unless $('.toggle').hasClass('toggle-off')
+		isClosed = $(this).hasClass('hidden')
+		hideDetails()
+		showDetails($(this).next()) if isClosed
+
+# Enable/Disable condensed view
+$('#tlCondensed1').click () -> 
+	tl.find('h3').css('cursor', 'pointer')
+	smoothScrollTo($('#frame15'), hideDetails)
+$('#tlCondensed2').click () -> 
+	tl.find('h3').css('cursor', 'auto')
+	showDetails()
+		
+# Show and hide the nav
+tlNav = tl.find('nav')
+showTlNav = () -> tlNav.stop().animate(right: '0', 700).removeClass('hidden')
+hideTlNav = (hide = false) -> 
+	time = if hide then 0 else 700
+	tlNav.stop().animate(right: "-#{tlNav.width()+40}px", time).addClass('hidden')
+
+# Hide the details and the nav on start
+hideDetails(null, true)
+hideTlNav(true)
+
+
+###########################################################################################
+#										SCROLLING
+###########################################################################################
+
 $(window).scroll (e) ->
 	scrollTop = $(this).scrollTop()
+
+	# Cache some values
+	offset05 = $('#frame05').offset().top - 5 # the '-5' is a security margin
+	offset10 = $('#frame10').offset().top - 5
+	offset15 = $('#frame15').offset().top - 5
+	offset20 = $('#frame20').offset().top - 5
+	offset30 = $('#frame30').offset().top - 5
+
+	# Update the active item in the nav menu
 	if scrollTop < offset10
 		activateNavItem '#frame00'
 	else if scrollTop < offset20
@@ -42,6 +106,13 @@ $(window).scroll (e) ->
 	else
 		activateNavItem '#frame30'
 	
-	if scrollTop > offset05 and nav.hasClass 'hidden'
-		nav.stop().animate(left: '0px', 1000).removeClass('hidden')
+	# Once per load, show the main nav menu
+	if scrollTop > offset05 and mainNav.hasClass 'hidden'
+		mainNav.stop().animate(left: '0px', 1000).removeClass('hidden')
 		setTimeout hideLabels, 5000
+
+	# Show and hide the timeline menu when we are on the timeline
+	if (offset15 - $(window).height() * 0.05) < scrollTop < (offset20 - $(window).height() * 0.3) and tlNav.hasClass 'hidden'
+		showTlNav()
+	else if (scrollTop < (offset15 - $(window).height() * 0.05) or scrollTop > (offset20 - $(window).height() * 0.3)) and !tlNav.hasClass 'hidden'
+		hideTlNav()

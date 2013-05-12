@@ -1,8 +1,8 @@
 @import url("http://fonts.googleapis.com/css?family=Lato:400,700,900,400italic");
 @font-face {
   font-family: "Flat-UI-Icons-16";
-  src: url("../fonts/Flat-UI-Icons-16.eot");
-  src: url("../fonts/Flat-UI-Icons-16.eot?#iefix") format("embedded-opentype"), url("../fonts/Flat-UI-Icons-16.woff") format("woff"), url("../fonts/Flat-UI-Icons-16.ttf") format("truetype"), url("../fonts/Flat-UI-Icons-16.svg#Flat-UI-Icons-16") format("svg");
+  src: url("../font/Flat-UI-Icons-16.eot");
+  src: url("../font/Flat-UI-Icons-16.eot?#iefix") format("embedded-opentype"), url("../font/Flat-UI-Icons-16.woff") format("woff"), url("../font/Flat-UI-Icons-16.ttf") format("truetype"), url("../font/Flat-UI-Icons-16.svg#Flat-UI-Icons-16") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -89,8 +89,8 @@
 
 @font-face {
   font-family: "Flat-UI-Icons-24";
-  src: url("../fonts/Flat-UI-Icons-24.eot");
-  src: url("../fonts/Flat-UI-Icons-24.eot?#iefix") format("embedded-opentype"), url("../fonts/Flat-UI-Icons-24.woff") format("woff"), url("../fonts/Flat-UI-Icons-24.ttf") format("truetype"), url("../fonts/Flat-UI-Icons-24.svg#Flat-UI-Icons-24") format("svg");
+  src: url("../font/Flat-UI-Icons-24.eot");
+  src: url("../font/Flat-UI-Icons-24.eot?#iefix") format("embedded-opentype"), url("../font/Flat-UI-Icons-24.woff") format("woff"), url("../font/Flat-UI-Icons-24.ttf") format("truetype"), url("../font/Flat-UI-Icons-24.svg#Flat-UI-Icons-24") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -1174,7 +1174,7 @@ textarea,
   .toggle.toggle-off {
     background-color: #cbd2d8; }
     .toggle.toggle-off .toggle-radio {
-      background-image: url("../images/toggle/icon-off.png");
+      background-image: url("../img/toggle/icon-off.png");
       background-position: 0 0;
       color: white;
       left: 0;
@@ -1184,7 +1184,7 @@ textarea,
       .toggle.toggle-off .toggle-radio:first-child {
         left: -120%; }
   .toggle .toggle-radio {
-    background: url("../images/toggle/icon-on.png") right top no-repeat;
+    background: url("../img/toggle/icon-on.png") right top no-repeat;
     color: #1abc9c;
     display: block;
     font-weight: 700;
@@ -1216,10 +1216,10 @@ textarea,
     .toggle.toggle-icon.toggle-off {
       border-radius: 7px 6px 6px 7px; }
       .toggle.toggle-icon.toggle-off .toggle-radio {
-        background-image: url("../images/toggle/block-off.png");
+        background-image: url("../img/toggle/block-off.png");
         background-position: 0 0; }
     .toggle.toggle-icon .toggle-radio {
-      background-image: url("../images/toggle/block-on.png");
+      background-image: url("../img/toggle/block-on.png");
       background-position: 62px 0;
       border-radius: 6px;
       min-width: 27px;
@@ -1229,10 +1229,10 @@ textarea,
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 2) {
   .toggle.toggle-off .toggle-radio {
-    background-image: url("../images/toggle/icon-off-2x.png");
+    background-image: url("../img/toggle/icon-off-2x.png");
     background-size: 30px 29px; }
   .toggle .toggle-radio {
-    background-image: url("../images/toggle/icon-on-2x.png");
+    background-image: url("../img/toggle/icon-on-2x.png");
     background-size: 30px 29px; } }
 .tagsinput {
   background: white;

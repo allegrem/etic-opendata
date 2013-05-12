@@ -28,16 +28,14 @@
 .btn i {
   margin-right: 6px;
 }
-a:focus {
+a:focus,
+.btn:focus {
   outline: none;
 }
 nav {
   position: fixed;
-  left: 0px;
-  top: 75px;
   background-color: rgba(189, 195, 199, 0.5);
   padding: 5px;
-  padding-left: 0;
 }
 nav ul {
   list-style-type: none;
@@ -45,7 +43,6 @@ nav ul {
 }
 nav ul li {
   padding: 10px;
-  padding-left: 15px;
 }
 nav ul li a,
 nav ul li a:hover,
@@ -63,7 +60,6 @@ nav ul li a:hover span,
 nav ul li a:focus span {
   overflow: hidden;
   white-space: nowrap;
-  margin-left: 7px;
 }
 nav ul li:hover,
 nav ul li.selected {
@@ -72,6 +68,17 @@ nav ul li.selected {
 nav ul li:hover a,
 nav ul li.selected a {
   color: #ecf0f1;
+}
+.main-nav {
+  left: 0px;
+  top: 75px;
+  padding-left: 0px;
+}
+.main-nav li {
+  padding-left: 15px;
+}
+.main-nav li span {
+  margin-left: 7px;
 }
 .frame {
   margin: 0;
@@ -111,10 +118,13 @@ nav ul li.selected a {
   color: #16a085;
 }
 #frame10 {
+  background-color: #8e44ad;
+}
+#frame10 .btn {
   background-color: #9b59b6;
 }
 #frame15 {
-  color: #9b59b6;
+  color: #8e44ad;
 }
 #frame20 {
   background-color: #c0392b;
@@ -127,6 +137,51 @@ nav ul li.selected a {
 }
 #frame35 {
   color: #e67e22;
+}
+.timeline .toggle label,
+.timeline .toggle.toggle-off label {
+  background: none;
+  color: #ecf0f1;
+  margin-right: -10px;
+  margin-left: -10px;
+}
+.timeline .toggle label {
+  background-color: #8e44ad;
+}
+.timeline nav {
+  right: 0px;
+  top: 75px;
+  padding-left: 10px;
+  padding-right: 30px;
+}
+.timeline nav li {
+  padding-right: 15px;
+}
+.timeline nav li span {
+  margin-right: 7px;
+}
+.timeline h2 {
+  float: left;
+  width: 10%;
+  color: #ecf0f1;
+  background-color: #8e44ad;
+  text-align: center;
+  clear: both;
+}
+.timeline h2:not(:first-of-type) {
+  margin-top: 30px;
+}
+.timeline h3 {
+  margin-left: 20%;
+}
+.timeline h3:not(:first-of-type) {
+  margin-top: 30px;
+}
+.timeline h3:hover {
+  cursor: pointer;
+}
+.timeline > p {
+  margin-left: 20%;
 }
 footer.frame {
   background-color: #2c3e50;

@@ -31,7 +31,7 @@
         <![endif]-->
 
 
-        <nav>
+        <nav class="main-nav">
             <ul>
                 <li class="selected"><a href="#frame00"><i class="icon-unlock-alt"></i> <span>OpenData</span></a></li>
                 <li><a href="#frame10"><i class="icon-calendar"></i> <span>Historique</span></a></li>
@@ -50,7 +50,7 @@
             <i class="icon-unlock-alt main-icon"></i>
             <h1>OpenData</h1>
             <p>Texte d'introduction... Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-            <p><a class="btn btn-primary btn-large"><i class="icon-play-sign"></i> Commencer</a></p>
+            <p><a href="#frame05" class="btn btn-primary btn-large scroll-to"><i class="icon-play-sign"></i> Commencer</a></p>
         </div>
 
         <!-- FRAME 5 -->
@@ -69,13 +69,52 @@
             <i class="icon-calendar main-icon"></i>
             <h1>Historique</h1>
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+            <p><a href="#frame15" class="btn btn-primary btn-large scroll-to"><i class="icon-play-sign"></i> Voir la frise</a></p>
         </div>
 
 
         <!-- FRAME 15 -->
 
-        <div class="frame" id="frame15">
+        <div class="frame timeline" id="frame15">
+            
+            <nav>
+                <p>Affichage condensé</p>
+                <div class="toggle">
+                    <label class="toggle-radio" for="tlCondensed2">ON <i class="icon-circle"></i></label>
+                    <input id="tlCondensed1" type="radio" checked="checked">
+                    <label class="toggle-radio" for="tlCondensed1"><i class="icon-circle"></i> OFF</label>
+                    <input id="tlCondensed2" type="radio">
+                </div>
+            </nav>
+
+            <h2>1966</h2>
+            <h3>Freedom of Information Act (USA)</h3>
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+
+            <h2>1978</h2>
+            <h3>Loi d'accès à l'information en France (loi CADA)</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+
+            <h2>2006</h2>
+            <h3>Mars : « Give us back our crown jewels » (The Guardian)</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+
+            <h2>2007</h2>
+            <h3>Décembre : Réunion de Sébastopol (Californie)</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+
+            <h2>2009</h2>
+            <h3>Mai : « We want raw data, now ! » (Tim Berners-Lee)</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+
+            <h3>Ouverture de data.gov (USA)</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+
+            <h3>Ouverture de data.gov.uk (GB)</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+
+            <h2>2010</h2>
+            <h3>Octobre : Plateforme de la métropole rennaise</h3>
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
         </div>
 
@@ -137,6 +176,8 @@
         <script src="js/bootstrap.min.js"></script>
 
         <script src="js/etic-opendata.js"></script>
+
+        <script src="js/custom_radio.js"></script>
 
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
