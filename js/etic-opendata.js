@@ -134,7 +134,7 @@
   hideTlNav(true);
 
   $(window).scroll(function(e) {
-    var offset05, offset10, offset15, offset20, offset30, scrollTop;
+    var offset05, offset10, offset15, offset20, offset30, offset40, scrollTop;
 
     scrollTop = $(this).scrollTop();
     offset05 = $('#frame05').offset().top - 5;
@@ -142,14 +142,17 @@
     offset15 = $('#frame15').offset().top - 5;
     offset20 = $('#frame20').offset().top - 5;
     offset30 = $('#frame30').offset().top - 5;
+    offset40 = $('#frame40').offset().top - 5;
     if (scrollTop < offset10) {
       activateNavItem('#frame00');
     } else if (scrollTop < offset20) {
       activateNavItem('#frame10');
     } else if (scrollTop < offset30) {
       activateNavItem('#frame20');
-    } else {
+    } else if (scrollTop < offset40) {
       activateNavItem('#frame30');
+    } else {
+      activateNavItem('#frame40');
     }
     if (scrollTop > offset05 && mainNav.hasClass('hidden')) {
       mainNav.stop().animate({

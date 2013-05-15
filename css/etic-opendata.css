@@ -105,7 +105,10 @@ nav ul li.selected a {
   margin-top: 2em;
 }
 #frame00 {
-  background-color: #16a085;
+  background-color: #27ae60;
+}
+#frame00 .btn {
+  background-color: #2ecc71;
 }
 #frame00 h1 {
   font-size: 10em;
@@ -118,27 +121,33 @@ nav ul li.selected a {
   margin-left: 0px;
 }
 #frame05 {
-  color: #16a085;
+  color: #27ae60;
 }
 #frame10 {
-  background-color: #8e44ad;
+  background-color: #16a085;
 }
 #frame10 .btn {
-  background-color: #9b59b6;
+  background-color: #1abc9c;
 }
 #frame15 {
-  color: #8e44ad;
+  color: #16a085;
 }
 #frame20 {
-  background-color: #c0392b;
+  background-color: #8e44ad;
 }
 #frame25 {
-  color: #c0392b;
+  color: #8e44ad;
 }
 #frame30 {
-  background-color: #e67e22;
+  background-color: #c0392b;
 }
 #frame35 {
+  color: #c0392b;
+}
+#frame40 {
+  background-color: #e67e22;
+}
+#frame45 {
   color: #e67e22;
 }
 .timeline .toggle label,
@@ -149,7 +158,7 @@ nav ul li.selected a {
   margin-left: -10px;
 }
 .timeline .toggle label {
-  background-color: #8e44ad;
+  background-color: #16a085;
 }
 .timeline nav {
   right: 0px;
@@ -167,7 +176,7 @@ nav ul li.selected a {
   float: left;
   width: 10%;
   color: #ecf0f1;
-  background-color: #8e44ad;
+  background-color: #16a085;
   text-align: center;
   clear: both;
 }

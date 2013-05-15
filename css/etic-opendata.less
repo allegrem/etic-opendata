@@ -7,6 +7,12 @@
 
 @cloud: #ecf0f1;
 
+@color00: #27ae60;
+@color10: #16a085;
+@color20: #8e44ad;
+@color30: #c0392b;
+@color40: #e67e22;
+
 .btn i {
 	margin-right: 6px;
 }
@@ -106,7 +112,11 @@ nav {
 }
 
 #frame00 {
-	background-color: #16a085;
+	background-color: @color00;
+
+	.btn {
+		background-color: #2ecc71;
+	}
 
 	h1 {
 		font-size: 10em;
@@ -122,35 +132,43 @@ nav {
 }
 
 #frame05 {
-	color: #16a085;
+	color: @color00;
 }
 
 #frame10 {
-	background-color: #8e44ad;
+	background-color: @color10;
 
 	.btn {
-		background-color: #9b59b6;
+		background-color: #1abc9c;
 	}
 }
 
 #frame15 {
-	color: #8e44ad;
+	color: @color10;
 }
 
 #frame20 {
-	background-color: #c0392b;
+	background-color: @color20;
 }
 
 #frame25 {
-	color: #c0392b;
+	color: @color20;
 }
 
 #frame30 {
-	background-color: #e67e22;
+	background-color: @color30;
 }
 
 #frame35 {
-	color: #e67e22;
+	color: @color30;
+}
+
+#frame40 {
+	background-color: @color40;
+}
+
+#frame45 {
+	color: @color40;
 }
 
 
@@ -169,7 +187,7 @@ nav {
 		}
 
 		label {
-			background-color: #8e44ad;
+			background-color: @color10;
 		}
 	}
 
@@ -191,7 +209,7 @@ nav {
 		float: left;
 		width: 10%;
 		color: @cloud;
-		background-color: #8e44ad;
+		background-color: @color10;
 		text-align: center;
 		clear: both;
 
