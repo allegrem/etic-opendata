@@ -101,6 +101,9 @@ nav ul li.selected a {
   font-size: 1.5em;
   line-height: 2em;
 }
+.frame h2:not(:first-of-type) {
+  margin-top: 2em;
+}
 #frame00 {
   background-color: #16a085;
 }
