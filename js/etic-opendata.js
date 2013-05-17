@@ -1,5 +1,6 @@
 (function() {
-  var activateNavItem, allDetails, hideDetails, hideLabels, hideTlNav, label, labelInitialWidth, mainNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav;
+  var activateNavItem, actors, actorsCategories, actorsDiv, actorsPositions, actorsTarget, allDetails, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav,
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
     return $('html, body').stop().animate({
@@ -132,6 +133,63 @@
   hideDetails(null, true);
 
   hideTlNav(true);
+
+  actorsDiv = $('.actors');
+
+  actorsTarget = actorsDiv.find('.row-fluid');
+
+  actors = actorsDiv.find('.actor');
+
+  listDataAttribute = function(attribute, elements) {
+    var attributeValues;
+
+    attributeValues = [];
+    elements.each(function(i, e) {
+      var a;
+
+      a = $(e).data(attribute);
+      if (__indexOf.call(attributeValues, a) < 0) {
+        return attributeValues.push(a);
+      }
+    });
+    return attributeValues;
+  };
+
+  actorsCategories = listDataAttribute('categorie', actors);
+
+  actorsPositions = listDataAttribute('position', actors);
+
+  initAttributeView = function(attributeName, attributeList) {
+    var actorsColumns, attributeListLength, i, spanValue, _i, _ref;
+
+    attributeListLength = attributeList.length;
+    spanValue = Math.ceil(12 / attributeListLength);
+    actorsColumns = [];
+    for (i = _i = 0, _ref = attributeListLength - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+      actorsTarget.append("<div class='span" + spanValue + "' data-" + attributeName + "='" + attributeList[i] + "'>\n	<h2>" + attributeList[i] + "</h2>\n</div>");
+      actorsColumns.push(actorsTarget.find("div.span" + spanValue + ":last-of-type"));
+    }
+    actors.each(function(i, a) {
+      var columnNb, _j, _ref1, _results;
+
+      columnNb = null;
+      _results = [];
+      for (i = _j = 0, _ref1 = attributeListLength - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; i = 0 <= _ref1 ? ++_j : --_j) {
+        if (attributeList[i] === $(a).data(attributeName)) {
+          actorsColumns[i].append(a);
+          break;
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    });
+    return actors.find(".label-" + attributeName).hide();
+  };
+
+  actors.find('p').hide();
+
+  initAttributeView('categorie', actorsCategories);
 
   $(window).scroll(function(e) {
     var offset05, offset10, offset15, offset20, offset30, offset40, scrollTop;

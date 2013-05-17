@@ -83,6 +83,55 @@ hideTlNav(true)
 
 
 ###########################################################################################
+#										ACTORS
+###########################################################################################
+
+# Cache some values
+actorsDiv = $('.actors')
+actorsTarget = actorsDiv.find('.row-fluid')
+actors = actorsDiv.find('.actor')
+
+# Count the number of differente values in a data attribute
+listDataAttribute = (attribute, elements) ->
+	attributeValues = []
+	elements.each (i,e) ->
+		a = $(e).data(attribute)
+		attributeValues.push a  unless a in attributeValues
+	attributeValues
+
+actorsCategories = listDataAttribute 'categorie', actors
+actorsPositions = listDataAttribute 'position', actors
+
+# Show actors by categories
+initAttributeView = (attributeName, attributeList) ->
+	# Create columns
+	attributeListLength = attributeList.length
+	spanValue = Math.ceil 12 / attributeListLength
+	actorsColumns = []
+	for i in [0..attributeListLength-1]
+		actorsTarget.append("""
+			<div class='span#{spanValue}' data-#{attributeName}='#{attributeList[i]}'>
+				<h2>#{attributeList[i]}</h2>
+			</div>""")
+		actorsColumns.push actorsTarget.find("div.span#{spanValue}:last-of-type") # A AMELIORER !!
+
+	# Move actors to the right column
+	actors.each (i,a) ->
+		columnNb = null
+		for i in [0..attributeListLength-1]
+			if attributeList[i] == $(a).data(attributeName)
+				actorsColumns[i].append a
+				break
+
+	# Hide attribute label
+	actors.find(".label-#{attributeName}").hide()
+
+# On load, hide some content and initiate categorie view
+actors.find('p').hide()
+initAttributeView 'categorie', actorsCategories
+
+
+###########################################################################################
 #										SCROLLING
 ###########################################################################################
 

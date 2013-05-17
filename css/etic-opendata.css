@@ -199,6 +199,20 @@ nav ul li.selected a {
 .timeline > p {
   margin-left: 20%;
 }
+.actors .actor {
+  background-color: #8e44ad;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
+}
+.actors .actor h3 {
+  position: relative;
+  bottom: 40px;
+  padding-left: 10px;
+  width: 100%;
+  background-color: #ecf0f1;
+  background-color: rgba(237, 241, 242, 0.5);
+}
 footer.frame {
   background-color: #2c3e50;
   color: #95a5a6;
