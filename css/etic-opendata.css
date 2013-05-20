@@ -32,6 +32,17 @@ a:focus,
 .btn:focus {
   outline: none;
 }
+.toggle .toggle-radio,
+.toggle.toggle-off .toggle-radio {
+  background: none;
+  color: #ecf0f1;
+  margin-right: -10px;
+  margin-left: -10px;
+}
+.toggle .toggle-radio i,
+.toggle.toggle-off .toggle-radio i {
+  margin-left: 5px;
+}
 nav {
   position: fixed;
   background-color: rgba(189, 195, 199, 0.5);
@@ -139,6 +150,9 @@ nav ul li.selected a {
 #frame20 {
   background-color: #8e44ad;
 }
+#frame20 .btn {
+  background-color: #9b59b6;
+}
 #frame25 {
   color: #8e44ad;
 }
@@ -154,27 +168,14 @@ nav ul li.selected a {
 #frame45 {
   color: #e67e22;
 }
-.timeline .toggle label,
-.timeline .toggle.toggle-off label {
-  background: none;
-  color: #ecf0f1;
-  margin-right: -10px;
-  margin-left: -10px;
-}
-.timeline .toggle label {
-  background-color: #16a085;
-}
 .timeline nav {
   right: 0px;
   top: 75px;
   padding-left: 10px;
   padding-right: 30px;
 }
-.timeline nav li {
-  padding-right: 15px;
-}
-.timeline nav li span {
-  margin-right: 7px;
+.timeline nav .toggle label {
+  background-color: #16a085;
 }
 .timeline h2 {
   float: left;
@@ -199,6 +200,16 @@ nav ul li.selected a {
 .timeline > p {
   margin-left: 20%;
 }
+.actors nav {
+  right: 0px;
+  top: 75px;
+  padding-left: 10px;
+  padding-right: 30px;
+}
+.actors nav .toggle label,
+.actors nav .toggle.toggle-off label {
+  background-color: #8e44ad;
+}
 .actors .actor {
   background-color: #8e44ad;
   width: 200px;
@@ -211,7 +222,11 @@ nav ul li.selected a {
   padding-left: 10px;
   width: 100%;
   background-color: #ecf0f1;
-  background-color: rgba(237, 241, 242, 0.5);
+  background-color: rgba(237, 241, 242, 0.7);
+}
+.actors .actor .label {
+  background-color: #ecf0f1;
+  color: #8e44ad;
 }
 footer.frame {
   background-color: #2c3e50;

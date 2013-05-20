@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDiv, actorsPositions, actorsTarget, allDetails, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav,
+  var activateNavItem, actors, actorsCategories, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -126,7 +126,7 @@
     }
     time = hide ? 0 : 700;
     return tlNav.stop().animate({
-      right: "-" + (tlNav.width() + 40) + "px"
+      right: "-" + (tlNav.width() + 50) + "px"
     }, time).addClass('hidden');
   };
 
@@ -160,14 +160,16 @@
   actorsPositions = listDataAttribute('position', actors);
 
   initAttributeView = function(attributeName, attributeList) {
-    var actorsColumns, attributeListLength, i, spanValue, _i, _ref;
+    var actorsColumns, attributeListLength, el, i, spanValue, _i, _ref;
 
     attributeListLength = attributeList.length;
     spanValue = Math.ceil(12 / attributeListLength);
+    actorsTarget.find("h2, div").remove();
     actorsColumns = [];
     for (i = _i = 0, _ref = attributeListLength - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-      actorsTarget.append("<div class='span" + spanValue + "' data-" + attributeName + "='" + attributeList[i] + "'>\n	<h2>" + attributeList[i] + "</h2>\n</div>");
-      actorsColumns.push(actorsTarget.find("div.span" + spanValue + ":last-of-type"));
+      el = $("<div class='span" + spanValue + "' data-" + attributeName + "='" + attributeList[i] + "'>\n	<h2>" + attributeList[i] + "</h2>\n</div>");
+      actorsTarget.append(el);
+      actorsColumns.push(el);
     }
     actors.each(function(i, a) {
       var columnNb, _j, _ref1, _results;
@@ -184,21 +186,53 @@
       }
       return _results;
     });
+    actors.find('.label').show();
     return actors.find(".label-" + attributeName).hide();
+  };
+
+  $('#actorsView1').click(function(e) {
+    return initAttributeView('categorie', actorsCategories);
+  });
+
+  $('#actorsView2').click(function(e) {
+    return initAttributeView('position', actorsPositions);
+  });
+
+  actorsNav = actorsDiv.find('nav');
+
+  showActorsNav = function() {
+    return actorsNav.stop().animate({
+      right: '0'
+    }, 700).removeClass('hidden');
+  };
+
+  hideActorsNav = function(hide) {
+    var time;
+
+    if (hide == null) {
+      hide = false;
+    }
+    time = hide ? 0 : 700;
+    return actorsNav.stop().animate({
+      right: "-" + (actorsNav.width() + 50) + "px"
+    }, time).addClass('hidden');
   };
 
   actors.find('p').hide();
 
   initAttributeView('categorie', actorsCategories);
 
+  hideActorsNav(true);
+
   $(window).scroll(function(e) {
-    var offset05, offset10, offset15, offset20, offset30, offset40, scrollTop;
+    var offset05, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;
 
     scrollTop = $(this).scrollTop();
     offset05 = $('#frame05').offset().top - 5;
     offset10 = $('#frame10').offset().top - 5;
     offset15 = $('#frame15').offset().top - 5;
     offset20 = $('#frame20').offset().top - 5;
+    offset25 = $('#frame25').offset().top - 5;
     offset30 = $('#frame30').offset().top - 5;
     offset40 = $('#frame40').offset().top - 5;
     if (scrollTop < offset10) {
@@ -219,9 +253,14 @@
       setTimeout(hideLabels, 5000);
     }
     if (((offset15 - $(window).height() * 0.05) < scrollTop && scrollTop < (offset20 - $(window).height() * 0.3)) && tlNav.hasClass('hidden')) {
-      return showTlNav();
+      showTlNav();
     } else if ((scrollTop < (offset15 - $(window).height() * 0.05) || scrollTop > (offset20 - $(window).height() * 0.3)) && !tlNav.hasClass('hidden')) {
-      return hideTlNav();
+      hideTlNav();
+    }
+    if (((offset25 - $(window).height() * 0.05) < scrollTop && scrollTop < (offset30 - $(window).height() * 0.3)) && actorsNav.hasClass('hidden')) {
+      return showActorsNav();
+    } else if ((scrollTop < (offset25 - $(window).height() * 0.05) || scrollTop > (offset30 - $(window).height() * 0.3)) && !actorsNav.hasClass('hidden')) {
+      return hideActorsNav();
     }
   });
 

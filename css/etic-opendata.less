@@ -21,6 +21,17 @@ a:focus, .btn:focus {
 	outline: none;
 }
 
+.toggle .toggle-radio, .toggle.toggle-off .toggle-radio {
+		background: none;
+		color: @cloud;
+		margin-right: -10px;
+		margin-left: -10px;
+
+		i {
+			margin-left: 5px;
+		}
+}
+
 
 // ===================================================
 // 						    NAV
@@ -154,6 +165,10 @@ nav {
 
 #frame20 {
 	background-color: @color20;
+
+	.btn {
+		background-color: #9b59b6;
+	}
 }
 
 #frame25 {
@@ -182,31 +197,14 @@ nav {
 // ===================================================
 
 .timeline {
-	.toggle {
-		label, &.toggle-off label {
-			background: none;
-			color: @cloud;
-			margin-right: -10px;
-			margin-left: -10px;
-
-		}
-
-		label {
-			background-color: @color10;
-		}
-	}
-
 	nav {
 		right: 0px;
 		top: 75px;
 		padding-left: 10px;
 		padding-right: 30px;
 
-		li {
-			padding-right: 15px;
-			span {
-				margin-right: 7px;
-			}
+		.toggle label {
+			background-color: @color10;
 		}
 	}
 
@@ -247,6 +245,17 @@ nav {
 // ===================================================
 
 .actors {
+	nav {
+		right: 0px;
+		top: 75px;
+		padding-left: 10px;
+		padding-right: 30px;
+
+		.toggle label, .toggle.toggle-off label {
+			background-color: @color20;
+		}
+	}
+
 	.actor {
 		background-color: @color20;
 		width: 200px;
@@ -259,7 +268,12 @@ nav {
 			padding-left: 10px;
 			width: 100%;
 			background-color: @cloud;
-			#translucent > .background(@cloud,0.5); 
+			#translucent > .background(@cloud,0.7); 
+		}
+
+		.label {
+			background-color: @cloud;
+			color: @color20;
 		}
 	}
 }

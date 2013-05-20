@@ -24,7 +24,7 @@ activateNavItem = (anchor) ->
 mainNav = $('nav.main-nav')
 mainNav.css('left', "-#{mainNav.width()+10}px").addClass('hidden')
 
-# Show/Hide lables in the main nav menu
+# Show/Hide labels in the main nav menu
 labelInitialWidth = Math.max.apply Math, ($(label).width() for label in mainNav.find('span')) # compute the max width of all the labels
 showLabels = () -> 
 	mainNav.find('span').stop()
@@ -75,7 +75,7 @@ tlNav = tl.find('nav')
 showTlNav = () -> tlNav.stop().animate(right: '0', 700).removeClass('hidden')
 hideTlNav = (hide = false) -> 
 	time = if hide then 0 else 700
-	tlNav.stop().animate(right: "-#{tlNav.width()+40}px", time).addClass('hidden')
+	tlNav.stop().animate(right: "-#{tlNav.width()+50}px", time).addClass('hidden')
 
 # Hide the details and the nav on start
 hideDetails(null, true)
@@ -102,18 +102,22 @@ listDataAttribute = (attribute, elements) ->
 actorsCategories = listDataAttribute 'categorie', actors
 actorsPositions = listDataAttribute 'position', actors
 
-# Show actors by categories
+# Show actors by a given attribute
 initAttributeView = (attributeName, attributeList) ->
-	# Create columns
+	# Compute some values and remove previous columns
 	attributeListLength = attributeList.length
 	spanValue = Math.ceil 12 / attributeListLength
+	actorsTarget.find("h2, div").remove()
+
+	# Create actorsColumns
 	actorsColumns = []
 	for i in [0..attributeListLength-1]
-		actorsTarget.append("""
+		el = $("""
 			<div class='span#{spanValue}' data-#{attributeName}='#{attributeList[i]}'>
 				<h2>#{attributeList[i]}</h2>
 			</div>""")
-		actorsColumns.push actorsTarget.find("div.span#{spanValue}:last-of-type") # A AMELIORER !!
+		actorsTarget.append el
+		actorsColumns.push el
 
 	# Move actors to the right column
 	actors.each (i,a) ->
@@ -124,11 +128,24 @@ initAttributeView = (attributeName, attributeList) ->
 				break
 
 	# Hide attribute label
+	actors.find('.label').show()
 	actors.find(".label-#{attributeName}").hide()
+
+# Select the representation (by category or by position)
+$('#actorsView1').click (e) -> initAttributeView 'categorie', actorsCategories
+$('#actorsView2').click (e) -> initAttributeView 'position', actorsPositions
+
+# Show and hide the nav
+actorsNav = actorsDiv.find('nav')
+showActorsNav = () -> actorsNav.stop().animate(right: '0', 700).removeClass('hidden')
+hideActorsNav = (hide = false) -> 
+	time = if hide then 0 else 700
+	actorsNav.stop().animate(right: "-#{actorsNav.width()+50}px", time).addClass('hidden')
 
 # On load, hide some content and initiate categorie view
 actors.find('p').hide()
 initAttributeView 'categorie', actorsCategories
+hideActorsNav true
 
 
 ###########################################################################################
@@ -138,11 +155,12 @@ initAttributeView 'categorie', actorsCategories
 $(window).scroll (e) ->
 	scrollTop = $(this).scrollTop()
 
-	# Cache some values
-	offset05 = $('#frame05').offset().top - 5 # the '-5' is a security margin
+	# Cache some values (the '-5' is a security margin)
+	offset05 = $('#frame05').offset().top - 5
 	offset10 = $('#frame10').offset().top - 5
 	offset15 = $('#frame15').offset().top - 5
 	offset20 = $('#frame20').offset().top - 5
+	offset25 = $('#frame25').offset().top - 5
 	offset30 = $('#frame30').offset().top - 5
 	offset40 = $('#frame40').offset().top - 5
 
@@ -168,3 +186,9 @@ $(window).scroll (e) ->
 		showTlNav()
 	else if (scrollTop < (offset15 - $(window).height() * 0.05) or scrollTop > (offset20 - $(window).height() * 0.3)) and !tlNav.hasClass 'hidden'
 		hideTlNav()
+
+	# Show and hide the actors menu when we are on the timeline
+	if (offset25 - $(window).height() * 0.05) < scrollTop < (offset30 - $(window).height() * 0.3) and actorsNav.hasClass 'hidden'
+		showActorsNav()
+	else if (scrollTop < (offset25 - $(window).height() * 0.05) or scrollTop > (offset30 - $(window).height() * 0.3)) and !actorsNav.hasClass 'hidden'
+		hideActorsNav()
