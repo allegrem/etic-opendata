@@ -116,15 +116,32 @@ initAttributeView = (attributeName, attributeList) ->
 			<div class='span#{spanValue}' data-#{attributeName}='#{attributeList[i]}'>
 				<h2>#{attributeList[i]}</h2>
 			</div>""")
-		actorsTarget.append el
 		actorsColumns.push el
+		actorsTarget.append el
 
 	# Move actors to the right column
 	actors.each (i,a) ->
 		columnNb = null
+		a = $(a)
 		for i in [0..attributeListLength-1]
-			if attributeList[i] == $(a).data(attributeName)
-				actorsColumns[i].append a
+			if attributeList[i] == a.data(attributeName)
+				# clone the actor in a new statically positionned hidden div
+				aCopy = a.clone()
+				a.css position: 'absolute'
+				aCopy.css(position: 'static', visibility: 'hidden')
+
+				# append this copy at the right place
+				actorsColumns[i].append aCopy
+				aTop = aCopy.position().top
+				aLeft = aCopy.position().left
+				
+				# animate the real actor to the new place
+				a.stop().animate(top: aTop, left: aLeft, 2000, () ->
+						a = aCopy.clone()
+						actorsColumns[i].append a
+						a.css position: 'static'
+						aCopy.remove()
+					)
 				break
 
 	# Hide attribute label

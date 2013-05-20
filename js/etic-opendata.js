@@ -168,17 +168,39 @@
     actorsColumns = [];
     for (i = _i = 0, _ref = attributeListLength - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
       el = $("<div class='span" + spanValue + "' data-" + attributeName + "='" + attributeList[i] + "'>\n	<h2>" + attributeList[i] + "</h2>\n</div>");
-      actorsTarget.append(el);
       actorsColumns.push(el);
+      actorsTarget.append(el);
     }
     actors.each(function(i, a) {
-      var columnNb, _j, _ref1, _results;
+      var aCopy, aLeft, aTop, columnNb, _j, _ref1, _results;
 
       columnNb = null;
+      a = $(a);
       _results = [];
       for (i = _j = 0, _ref1 = attributeListLength - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; i = 0 <= _ref1 ? ++_j : --_j) {
-        if (attributeList[i] === $(a).data(attributeName)) {
-          actorsColumns[i].append(a);
+        if (attributeList[i] === a.data(attributeName)) {
+          aCopy = a.clone();
+          a.css({
+            position: 'absolute'
+          });
+          aCopy.css({
+            position: 'static',
+            visibility: 'hidden'
+          });
+          actorsColumns[i].append(aCopy);
+          aTop = aCopy.position().top;
+          aLeft = aCopy.position().left;
+          a.stop().animate({
+            top: aTop,
+            left: aLeft
+          }, 2000, function() {
+            a = aCopy.clone();
+            actorsColumns[i].append(a);
+            a.css({
+              position: 'static'
+            });
+            return aCopy.remove();
+          });
           break;
         } else {
           _results.push(void 0);
