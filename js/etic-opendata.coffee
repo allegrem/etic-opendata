@@ -103,7 +103,7 @@ actorsCategories = listDataAttribute 'categorie', actors
 actorsPositions = listDataAttribute 'position', actors
 
 # Show actors by a given attribute
-initAttributeView = (attributeName, attributeList) ->
+initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
 	# Compute some values and remove previous columns
 	attributeListLength = attributeList.length
 	spanValue = Math.ceil 12 / attributeListLength
@@ -136,7 +136,7 @@ initAttributeView = (attributeName, attributeList) ->
 				aLeft = aCopy.position().left
 				
 				# animate the real actor to the new place
-				a.stop().animate(top: aTop, left: aLeft, 2000, () ->
+				a.stop().animate(top: aTop, left: aLeft, animationDuration, () ->
 						a = aCopy.clone()
 						actorsColumns[i].append a
 						a.css position: 'static'
@@ -147,6 +147,15 @@ initAttributeView = (attributeName, attributeList) ->
 	# Hide attribute label
 	actors.find('.label').show()
 	actors.find(".label-#{attributeName}").hide()
+
+# Show details of an actor when mouse is hover
+actorsDetailsTarget = actorsDiv.find('#actor-details')
+actors.mouseenter () ->
+	actorsDetailsTarget.html $(this).html()
+	actorsDetailsTarget.find('.label, p').show()
+	actorsDetailsTarget.stop().animate bottom: 0
+actors.mouseleave () ->
+	actorsDetailsTarget.stop().animate bottom: $(window).height() * -0.25
 
 # Select the representation (by category or by position)
 $('#actorsView1').click (e) -> initAttributeView 'categorie', actorsCategories
@@ -161,8 +170,9 @@ hideActorsNav = (hide = false) ->
 
 # On load, hide some content and initiate categorie view
 actors.find('p').hide()
-initAttributeView 'categorie', actorsCategories
+initAttributeView 'categorie', actorsCategories, 0
 hideActorsNav true
+actorsDetailsTarget.css bottom: $(window).height() * -0.25
 
 
 ###########################################################################################

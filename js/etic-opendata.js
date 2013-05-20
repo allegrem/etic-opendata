@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav,
+  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -159,9 +159,12 @@
 
   actorsPositions = listDataAttribute('position', actors);
 
-  initAttributeView = function(attributeName, attributeList) {
+  initAttributeView = function(attributeName, attributeList, animationDuration) {
     var actorsColumns, attributeListLength, el, i, spanValue, _i, _ref;
 
+    if (animationDuration == null) {
+      animationDuration = 2000;
+    }
     attributeListLength = attributeList.length;
     spanValue = Math.ceil(12 / attributeListLength);
     actorsTarget.find("h2, div").remove();
@@ -193,7 +196,7 @@
           a.stop().animate({
             top: aTop,
             left: aLeft
-          }, 2000, function() {
+          }, animationDuration, function() {
             a = aCopy.clone();
             actorsColumns[i].append(a);
             a.css({
@@ -211,6 +214,22 @@
     actors.find('.label').show();
     return actors.find(".label-" + attributeName).hide();
   };
+
+  actorsDetailsTarget = actorsDiv.find('#actor-details');
+
+  actors.mouseenter(function() {
+    actorsDetailsTarget.html($(this).html());
+    actorsDetailsTarget.find('.label, p').show();
+    return actorsDetailsTarget.stop().animate({
+      bottom: 0
+    });
+  });
+
+  actors.mouseleave(function() {
+    return actorsDetailsTarget.stop().animate({
+      bottom: $(window).height() * -0.25
+    });
+  });
 
   $('#actorsView1').click(function(e) {
     return initAttributeView('categorie', actorsCategories);
@@ -242,9 +261,13 @@
 
   actors.find('p').hide();
 
-  initAttributeView('categorie', actorsCategories);
+  initAttributeView('categorie', actorsCategories, 0);
 
   hideActorsNav(true);
+
+  actorsDetailsTarget.css({
+    bottom: $(window).height() * -0.25
+  });
 
   $(window).scroll(function(e) {
     var offset05, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;

@@ -210,6 +210,28 @@ nav ul li.selected a {
 .actors nav .toggle.toggle-off label {
   background-color: #8e44ad;
 }
+.actors #actor-details {
+  position: fixed;
+  bottom: 0px;
+  width: 50%;
+  margin: auto;
+  z-index: 50;
+  background-color: rgba(141, 67, 173, 0.9);
+  height: 25%;
+}
+.actors #actor-details h3 {
+  position: static;
+  color: #ecf0f1;
+}
+.actors #actor-details img {
+  float: left;
+  height: 100%;
+}
+.actors #actor-details p {
+  color: #ecf0f1;
+  line-height: 1.2em;
+  font-size: 1.2em;
+}
 .actors .actor {
   background-color: #8e44ad;
   width: 200px;
