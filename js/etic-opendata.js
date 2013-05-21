@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav,
+  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, pinActorsColumnTitles, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -145,11 +145,23 @@
 
     attributeValues = [];
     elements.each(function(i, e) {
-      var a;
+      var a, v;
 
       a = $(e).data(attribute);
-      if (__indexOf.call(attributeValues, a) < 0) {
-        return attributeValues.push(a);
+      if (__indexOf.call((function() {
+        var _i, _len, _results;
+
+        _results = [];
+        for (_i = 0, _len = attributeValues.length; _i < _len; _i++) {
+          v = attributeValues[_i];
+          _results.push(v.code);
+        }
+        return _results;
+      })(), a) < 0) {
+        return attributeValues.push({
+          code: a,
+          name: $(e).find(".label-" + attribute).text()
+        });
       }
     });
     return attributeValues;
@@ -170,12 +182,12 @@
     actorsTarget.find("h2, div").remove();
     actorsColumns = [];
     for (i = _i = 0, _ref = attributeListLength - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-      el = $("<div class='span" + spanValue + "' data-" + attributeName + "='" + attributeList[i] + "'>\n	<h2>" + attributeList[i] + "</h2>\n</div>");
+      el = $("<div class='span" + spanValue + "' data-" + attributeName + "='" + attributeList[i].code + "'>\n	<h2>" + attributeList[i].name + "</h2>\n</div>");
       actorsColumns.push(el);
       actorsTarget.append(el);
     }
-    actors.find('.label').hide();
-    actors.find(".label-" + attributeName).show();
+    actors.find('.label').show();
+    actors.find(".label-" + attributeName).hide();
     return actors.each(function(i, a) {
       var aCopy, aLeft, aTop, columnNb, _j, _ref1, _results;
 
@@ -183,7 +195,7 @@
       a = $(a);
       _results = [];
       for (i = _j = 0, _ref1 = attributeListLength - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; i = 0 <= _ref1 ? ++_j : --_j) {
-        if (attributeList[i] === a.data(attributeName)) {
+        if (attributeList[i].code === a.data(attributeName)) {
           aCopy = a.clone();
           a.css({
             position: 'absolute'
@@ -259,6 +271,14 @@
     }, time).addClass('hidden');
   };
 
+  pinActorsColumnTitles = function() {
+    return actorsDiv.find('h2').addClass('pin');
+  };
+
+  unpinActorsColumnTitles = function() {
+    return actorsDiv.find('h2').removeClass('pin');
+  };
+
   actors.find('p').hide();
 
   initAttributeView('categorie', actorsCategories, 0);
@@ -270,7 +290,7 @@
   });
 
   $(window).scroll(function(e) {
-    var offset05, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;
+    var firstActorTitle, offset05, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;
 
     scrollTop = $(this).scrollTop();
     offset05 = $('#frame05').offset().top - 5;
@@ -303,9 +323,15 @@
       hideTlNav();
     }
     if (((offset25 - $(window).height() * 0.05) < scrollTop && scrollTop < (offset30 - $(window).height() * 0.3)) && actorsNav.hasClass('hidden')) {
-      return showActorsNav();
+      showActorsNav();
     } else if ((scrollTop < (offset25 - $(window).height() * 0.05) || scrollTop > (offset30 - $(window).height() * 0.3)) && !actorsNav.hasClass('hidden')) {
-      return hideActorsNav();
+      hideActorsNav();
+    }
+    firstActorTitle = actorsDiv.find('h2').first();
+    if (((firstActorTitle.position().top < scrollTop && scrollTop < offset30)) && !firstActorTitle.hasClass('pin')) {
+      return pinActorsColumnTitles();
+    } else if ((scrollTop > offset30 || scrollTop < offset25 + 40) && firstActorTitle.hasClass('pin')) {
+      return unpinActorsColumnTitles();
     }
   });
 

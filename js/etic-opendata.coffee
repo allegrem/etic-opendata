@@ -96,7 +96,7 @@ listDataAttribute = (attribute, elements) ->
 	attributeValues = []
 	elements.each (i,e) ->
 		a = $(e).data(attribute)
-		attributeValues.push a  unless a in attributeValues
+		attributeValues.push {code: a, name: $(e).find(".label-#{attribute}").text()}  unless a in (v.code for v in attributeValues)
 	attributeValues
 
 actorsCategories = listDataAttribute 'categorie', actors
@@ -113,22 +113,22 @@ initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
 	actorsColumns = []
 	for i in [0..attributeListLength-1]
 		el = $("""
-			<div class='span#{spanValue}' data-#{attributeName}='#{attributeList[i]}'>
-				<h2>#{attributeList[i]}</h2>
+			<div class='span#{spanValue}' data-#{attributeName}='#{attributeList[i].code}'>
+				<h2>#{attributeList[i].name}</h2>
 			</div>""")
 		actorsColumns.push el
 		actorsTarget.append el
 
 	# Hide attribute label
-	actors.find('.label').hide()
-	actors.find(".label-#{attributeName}").show()
+	actors.find('.label').show()
+	actors.find(".label-#{attributeName}").hide()
 
 	# Move actors to the right column
 	actors.each (i,a) ->
 		columnNb = null
 		a = $(a)
 		for i in [0..attributeListLength-1]
-			if attributeList[i] == a.data(attributeName)
+			if attributeList[i].code == a.data(attributeName)
 				# clone the actor in a new statically positionned hidden div
 				aCopy = a.clone()
 				a.css position: 'absolute'
@@ -167,6 +167,10 @@ showActorsNav = () -> actorsNav.stop().animate(right: '0', 700).removeClass('hid
 hideActorsNav = (hide = false) -> 
 	time = if hide then 0 else 700
 	actorsNav.stop().animate(right: "-#{actorsNav.width()+50}px", time).addClass('hidden')
+
+# Pin/Unpin column titles
+pinActorsColumnTitles = () -> actorsDiv.find('h2').addClass('pin')
+unpinActorsColumnTitles = () -> actorsDiv.find('h2').removeClass('pin')
 
 # On load, hide some content and initiate categorie view
 actors.find('p').hide()
@@ -219,3 +223,10 @@ $(window).scroll (e) ->
 		showActorsNav()
 	else if (scrollTop < (offset25 - $(window).height() * 0.05) or scrollTop > (offset30 - $(window).height() * 0.3)) and !actorsNav.hasClass 'hidden'
 		hideActorsNav()
+
+	# Pin the actors column titles 
+	firstActorTitle = actorsDiv.find('h2').first()
+	if (firstActorTitle.position().top < scrollTop < offset30) and !firstActorTitle.hasClass 'pin'
+		pinActorsColumnTitles()
+	else if (scrollTop > offset30 or scrollTop < offset25 + 40) and firstActorTitle.hasClass 'pin'
+		unpinActorsColumnTitles()

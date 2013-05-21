@@ -210,6 +210,16 @@ nav ul li.selected a {
 .actors nav .toggle.toggle-off label {
   background-color: #8e44ad;
 }
+.actors h2 {
+  background-color: #ecf0f1;
+  z-index: 30;
+  width: 100%;
+  margin-top: 0;
+}
+.actors h2.pin {
+  position: fixed;
+  top: 0px;
+}
 .actors #actor-details {
   position: fixed;
   bottom: 0px;
