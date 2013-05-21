@@ -119,6 +119,10 @@ initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
 		actorsColumns.push el
 		actorsTarget.append el
 
+	# Hide attribute label
+	actors.find('.label').hide()
+	actors.find(".label-#{attributeName}").show()
+
 	# Move actors to the right column
 	actors.each (i,a) ->
 		columnNb = null
@@ -143,10 +147,6 @@ initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
 						aCopy.remove()
 					)
 				break
-
-	# Hide attribute label
-	actors.find('.label').show()
-	actors.find(".label-#{attributeName}").hide()
 
 # Show details of an actor when mouse is hover
 actorsDetailsTarget = actorsDiv.find('#actor-details')

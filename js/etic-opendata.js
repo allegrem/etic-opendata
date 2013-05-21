@@ -174,7 +174,9 @@
       actorsColumns.push(el);
       actorsTarget.append(el);
     }
-    actors.each(function(i, a) {
+    actors.find('.label').hide();
+    actors.find(".label-" + attributeName).show();
+    return actors.each(function(i, a) {
       var aCopy, aLeft, aTop, columnNb, _j, _ref1, _results;
 
       columnNb = null;
@@ -211,8 +213,6 @@
       }
       return _results;
     });
-    actors.find('.label').show();
-    return actors.find(".label-" + attributeName).hide();
   };
 
   actorsDetailsTarget = actorsDiv.find('#actor-details');
