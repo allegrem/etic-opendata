@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, attributeToText, categorieToText, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, pinActorsColumnTitles, positionToText, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
+  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, attributeNameToText, attributeToText, categorieToText, createAttributeFilter, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, pinActorsColumnTitles, positionToText, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -8,7 +8,7 @@
     }, 1000, callback);
   };
 
-  $('nav li, a.scroll-to').click(function(e) {
+  $('nav.main-nav li, a.scroll-to').click(function(e) {
     var target, _ref;
 
     e.preventDefault();
@@ -173,6 +173,15 @@
     }
   };
 
+  attributeNameToText = function(attributeName) {
+    switch (attributeName) {
+      case 'categorie':
+        return 'Catégorie';
+      case 'position':
+        return 'Position';
+    }
+  };
+
   listDataAttribute = function(attribute, elements) {
     var attributeValues;
 
@@ -205,7 +214,7 @@
   actorsPositions = listDataAttribute('position', actors);
 
   initAttributeView = function(attributeName, attributeList, animationDuration) {
-    var actorsColumns, attributeListLength, el, i, spanValue, _i, _ref;
+    var $filtersDiv, actorsColumns, attributeListLength, el, i, spanValue, _i, _ref;
 
     if (animationDuration == null) {
       animationDuration = 2000;
@@ -215,13 +224,17 @@
     actorsTarget.find("h2, div").remove();
     actorsColumns = [];
     for (i = _i = 0, _ref = attributeListLength - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-      el = $("<div class='span" + spanValue + "' data-" + attributeName + "='" + attributeList[i].code + "'>\n	<h2>" + attributeList[i].name + "</h2>\n</div>");
+      el = $("<div class='span" + spanValue + " actor-column' data-" + attributeName + "='" + attributeList[i].code + "'>\n	<h2>" + attributeList[i].name + "</h2>\n</div>");
       actorsColumns.push(el);
       actorsTarget.append(el);
     }
     actors.find('.label').show();
     actors.find(".label-" + attributeName).hide();
-    return actors.each(function(i, a) {
+    $filtersDiv = actorsDiv.find('#actorsSelectAttributes');
+    $filtersDiv.find('.toggle.toggle-off').each(function(i, e) {
+      return $(e).find('input').first().trigger('click', 0);
+    });
+    actors.each(function(i, a) {
       var aCopy, aLeft, aTop, columnNb, _j, _ref1, _results;
 
       columnNb = null;
@@ -257,6 +270,15 @@
         }
       }
       return _results;
+    });
+    return $filtersDiv.animate({
+      right: '-300px'
+    }, function() {
+      $filtersDiv.delay(animationDuration / 2).find('div').show();
+      $filtersDiv.find(".filter-" + attributeName).hide();
+      return $filtersDiv.animate({
+        right: '0px'
+      });
     });
   };
 
@@ -319,6 +341,37 @@
     return $a.find('h3').append("\ <span class='label label-position'>" + (positionToText($a.data('position'))) + "</span>\n\ <span class='label label-categorie'>" + (categorieToText($a.data('categorie'))) + "</span>");
   });
 
+  createAttributeFilter = function(attribute, attributeList) {
+    var $target, $toggle, code, name, _i, _len, _ref, _results;
+
+    $target = $("<div class='filter-" + attribute + "'><p>" + (attributeNameToText(attribute)) + "</p></div>");
+    actorsDiv.find('#actorsSelectAttributes').append($target);
+    _results = [];
+    for (_i = 0, _len = attributeList.length; _i < _len; _i++) {
+      _ref = attributeList[_i], code = _ref.code, name = _ref.name;
+      $toggle = $("<div class=\"toggle\">\n    <label class=\"toggle-radio\" for=\"actors_" + attribute + "_" + code + "\">" + (name.toUpperCase()) + " <i class=\"icon-circle\"></i></label>\n    <input id=\"actors_" + attribute + "_" + code + "\" type=\"radio\" checked=\"checked\">\n    <label class=\"toggle-radio\" for=\"actors_" + attribute + "_" + code + "\"><i class=\"icon-circle\"></i> " + (name.toUpperCase()) + "</label>\n    <input id=\"actors_" + attribute + "_" + code + "\" type=\"radio\">\n</div><br />");
+      $target.append($toggle);
+      _results.push((function(code) {
+        return $toggle.find("#actors_" + attribute + "_" + code).click(function(e, duration) {
+          if (duration == null) {
+            duration = 500;
+          }
+          $target = actorsDiv.find("[data-" + attribute + "=" + code + "]:not(.actor-column)");
+          if ($target.first().hasClass('filtered')) {
+            return $target.fadeTo(duration, 1).removeClass('filtered');
+          } else {
+            return $target.fadeTo(duration, 0.3).addClass('filtered');
+          }
+        });
+      })(code));
+    }
+    return _results;
+  };
+
+  createAttributeFilter('categorie', actorsCategories);
+
+  createAttributeFilter('position', actorsPositions);
+
   actors.find('p').hide();
 
   initAttributeView('categorie', actorsCategories, 0);
@@ -328,6 +381,8 @@
   actorsDetailsTarget.css({
     bottom: $(window).height() * -0.25
   });
+
+  actorsDiv.find('#actorsSelectAttributes .filter-categorie').hide();
 
   $(window).scroll(function(e) {
     var firstActorTitle, offset05, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;

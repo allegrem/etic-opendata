@@ -4,7 +4,7 @@
 
 # Smooth scroll
 smoothScrollTo = (e, callback) -> $('html, body').stop().animate(scrollTop: $(e).offset().top, 1000, callback)
-$('nav li, a.scroll-to').click (e) ->
+$('nav.main-nav li, a.scroll-to').click (e) ->
 	e.preventDefault()
 	target = $(this).attr('href') ? $(this).find('a').attr('href')
 	smoothScrollTo(target)
@@ -119,6 +119,13 @@ attributeToText = (attribute, value) ->
 		when 'position'
 			positionToText value
 
+attributeNameToText = (attributeName) ->
+	switch attributeName
+		when 'categorie'
+			'Catégorie'
+		when 'position'
+			'Position'
+
 # Count the number of differente values in a data attribute
 listDataAttribute = (attribute, elements) ->
 	attributeValues = []
@@ -141,7 +148,7 @@ initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
 	actorsColumns = []
 	for i in [0..attributeListLength-1]
 		el = $("""
-			<div class='span#{spanValue}' data-#{attributeName}='#{attributeList[i].code}'>
+			<div class='span#{spanValue} actor-column' data-#{attributeName}='#{attributeList[i].code}'>
 				<h2>#{attributeList[i].name}</h2>
 			</div>""")
 		actorsColumns.push el
@@ -150,6 +157,11 @@ initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
 	# Hide attribute label
 	actors.find('.label').show()
 	actors.find(".label-#{attributeName}").hide()
+
+	# Remove all filters
+	$filtersDiv = actorsDiv.find('#actorsSelectAttributes')
+	$filtersDiv.find('.toggle.toggle-off').each (i,e) ->
+		$(e).find('input').first().trigger 'click', 0
 
 	# Move actors to the right column
 	actors.each (i,a) ->
@@ -175,6 +187,12 @@ initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
 						aCopy.remove()
 					)
 				break
+
+	# Show the right filter nav
+	$filtersDiv.animate right: '-300px', ->
+		$filtersDiv.delay(animationDuration / 2).find('div').show()
+		$filtersDiv.find(".filter-#{attributeName}").hide()
+		$filtersDiv.animate right: '0px'
 
 # Show details of an actor when mouse is hover
 actorsDetailsTarget = actorsDiv.find('#actor-details')
@@ -208,11 +226,39 @@ actors.each (i, a) ->
 			\ <span class='label label-categorie'>#{categorieToText $a.data 'categorie'}</span>
 		"""
 
+# Create filters
+createAttributeFilter = (attribute, attributeList) ->
+	$target = $("<div class='filter-#{attribute}'><p>#{attributeNameToText attribute}</p></div>")
+	actorsDiv.find('#actorsSelectAttributes').append $target
+
+	for {code, name} in attributeList
+		$toggle = $("""
+				<div class="toggle">
+				    <label class="toggle-radio" for="actors_#{attribute}_#{code}">#{name.toUpperCase()} <i class="icon-circle"></i></label>
+				    <input id="actors_#{attribute}_#{code}" type="radio" checked="checked">
+				    <label class="toggle-radio" for="actors_#{attribute}_#{code}"><i class="icon-circle"></i> #{name.toUpperCase()}</label>
+				    <input id="actors_#{attribute}_#{code}" type="radio">
+				</div><br />
+			""")
+		$target.append $toggle
+
+		do (code) ->
+			$toggle.find("#actors_#{attribute}_#{code}").click (e, duration = 500) ->
+				$target = actorsDiv.find("[data-#{attribute}=#{code}]:not(.actor-column)")
+				if $target.first().hasClass 'filtered'
+					$target.fadeTo(duration, 1).removeClass('filtered')
+				else
+					$target.fadeTo(duration, 0.3).addClass('filtered')
+
+createAttributeFilter 'categorie', actorsCategories
+createAttributeFilter 'position', actorsPositions
+
 # On load, hide some content and initiate categorie view
 actors.find('p').hide()
 initAttributeView 'categorie', actorsCategories, 0
 hideActorsNav true
 actorsDetailsTarget.css bottom: $(window).height() * -0.25
+actorsDiv.find('#actorsSelectAttributes .filter-categorie').hide()
 
 
 ###########################################################################################
