@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, pinActorsColumnTitles, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
+  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, attributeToText, categorieToText, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, pinActorsColumnTitles, positionToText, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -140,6 +140,39 @@
 
   actors = actorsDiv.find('.actor');
 
+  categorieToText = function(categorie) {
+    switch (categorie) {
+      case 'public':
+        return 'Public';
+      case 'prive':
+        return 'Privé';
+      case 'citoyens':
+        return 'Citoyens';
+    }
+  };
+
+  positionToText = function(position) {
+    switch (position) {
+      case 'contributeur':
+        return 'Contributeur';
+      case 'reutilisateur':
+        return 'Réutilisateur';
+      case 'observateur':
+        return 'Observateur';
+      case 'reticent':
+        return 'Réticent';
+    }
+  };
+
+  attributeToText = function(attribute, value) {
+    switch (attribute) {
+      case 'categorie':
+        return categorieToText(value);
+      case 'position':
+        return positionToText(value);
+    }
+  };
+
   listDataAttribute = function(attribute, elements) {
     var attributeValues;
 
@@ -160,7 +193,7 @@
       })(), a) < 0) {
         return attributeValues.push({
           code: a,
-          name: $(e).find(".label-" + attribute).text()
+          name: attributeToText(attribute, a)
         });
       }
     });
@@ -279,6 +312,13 @@
     return actorsDiv.find('h2').removeClass('pin');
   };
 
+  actors.each(function(i, a) {
+    var $a;
+
+    $a = $(a);
+    return $a.find('h3').append("\ <span class='label label-position'>" + (positionToText($a.data('position'))) + "</span>\n\ <span class='label label-categorie'>" + (categorieToText($a.data('categorie'))) + "</span>");
+  });
+
   actors.find('p').hide();
 
   initAttributeView('categorie', actorsCategories, 0);
@@ -328,9 +368,9 @@
       hideActorsNav();
     }
     firstActorTitle = actorsDiv.find('h2').first();
-    if (((firstActorTitle.position().top < scrollTop && scrollTop < offset30)) && !firstActorTitle.hasClass('pin')) {
+    if (((firstActorTitle.position().top < scrollTop && scrollTop < offset30 - 120)) && !firstActorTitle.hasClass('pin')) {
       return pinActorsColumnTitles();
-    } else if ((scrollTop > offset30 || scrollTop < offset25 + 40) && firstActorTitle.hasClass('pin')) {
+    } else if ((scrollTop > offset30 - 120 || scrollTop < offset25 + 40) && firstActorTitle.hasClass('pin')) {
       return unpinActorsColumnTitles();
     }
   });

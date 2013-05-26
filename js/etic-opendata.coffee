@@ -91,12 +91,40 @@ actorsDiv = $('.actors')
 actorsTarget = actorsDiv.find('.row-fluid')
 actors = actorsDiv.find('.actor')
 
+# Conversion functions for categories and positions
+categorieToText = (categorie) ->
+	switch categorie
+		when 'public'
+			'Public'
+		when 'prive'
+			'Privé'
+		when 'citoyens'
+			'Citoyens'
+
+positionToText = (position) ->
+	switch position
+		when 'contributeur'
+			'Contributeur'
+		when 'reutilisateur'
+			'Réutilisateur'
+		when 'observateur'
+			'Observateur'
+		when 'reticent'
+			'Réticent'
+
+attributeToText = (attribute, value) ->
+	switch attribute
+		when 'categorie'
+			categorieToText value
+		when 'position'
+			positionToText value
+
 # Count the number of differente values in a data attribute
 listDataAttribute = (attribute, elements) ->
 	attributeValues = []
 	elements.each (i,e) ->
 		a = $(e).data(attribute)
-		attributeValues.push {code: a, name: $(e).find(".label-#{attribute}").text()}  unless a in (v.code for v in attributeValues)
+		attributeValues.push {code: a, name: attributeToText(attribute, a)}  unless a in (v.code for v in attributeValues)
 	attributeValues
 
 actorsCategories = listDataAttribute 'categorie', actors
@@ -172,6 +200,14 @@ hideActorsNav = (hide = false) ->
 pinActorsColumnTitles = () -> actorsDiv.find('h2').addClass('pin')
 unpinActorsColumnTitles = () -> actorsDiv.find('h2').removeClass('pin')
 
+# On load, automatically add labels
+actors.each (i, a) ->
+	$a = $(a)
+	$a.find('h3').append """
+			\ <span class='label label-position'>#{positionToText $a.data 'position'}</span>
+			\ <span class='label label-categorie'>#{categorieToText $a.data 'categorie'}</span>
+		"""
+
 # On load, hide some content and initiate categorie view
 actors.find('p').hide()
 initAttributeView 'categorie', actorsCategories, 0
@@ -226,7 +262,7 @@ $(window).scroll (e) ->
 
 	# Pin the actors column titles 
 	firstActorTitle = actorsDiv.find('h2').first()
-	if (firstActorTitle.position().top < scrollTop < offset30) and !firstActorTitle.hasClass 'pin'
+	if (firstActorTitle.position().top < scrollTop < offset30 - 120) and !firstActorTitle.hasClass 'pin'
 		pinActorsColumnTitles()
-	else if (scrollTop > offset30 or scrollTop < offset25 + 40) and firstActorTitle.hasClass 'pin'
+	else if (scrollTop > offset30 - 120 or scrollTop < offset25 + 40) and firstActorTitle.hasClass 'pin'
 		unpinActorsColumnTitles()
