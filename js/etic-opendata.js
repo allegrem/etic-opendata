@@ -272,7 +272,7 @@
       return _results;
     });
     return $filtersDiv.animate({
-      right: '-300px'
+      right: "-" + ($filtersDiv.width() * 1.8) + "px"
     }, function() {
       $filtersDiv.delay(animationDuration / 2).find('div').show();
       $filtersDiv.find(".filter-" + attributeName).hide();
@@ -322,7 +322,7 @@
     }
     time = hide ? 0 : 700;
     return actorsNav.stop().animate({
-      right: "-" + (actorsNav.width() + 50) + "px"
+      right: "-" + (actorsNav.width() + 100) + "px"
     }, time).addClass('hidden');
   };
 

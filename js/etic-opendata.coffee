@@ -189,7 +189,7 @@ initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
 				break
 
 	# Show the right filter nav
-	$filtersDiv.animate right: '-300px', ->
+	$filtersDiv.animate right: "-#{$filtersDiv.width()*1.8}px", ->
 		$filtersDiv.delay(animationDuration / 2).find('div').show()
 		$filtersDiv.find(".filter-#{attributeName}").hide()
 		$filtersDiv.animate right: '0px'
@@ -212,7 +212,7 @@ actorsNav = actorsDiv.find('nav')
 showActorsNav = () -> actorsNav.stop().animate(right: '0', 700).removeClass('hidden')
 hideActorsNav = (hide = false) -> 
 	time = if hide then 0 else 700
-	actorsNav.stop().animate(right: "-#{actorsNav.width()+50}px", time).addClass('hidden')
+	actorsNav.stop().animate(right: "-#{actorsNav.width()+100}px", time).addClass('hidden')
 
 # Pin/Unpin column titles
 pinActorsColumnTitles = () -> actorsDiv.find('h2').addClass('pin')
