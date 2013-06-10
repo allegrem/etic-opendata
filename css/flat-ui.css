@@ -1183,7 +1183,7 @@ textarea,
       .toggle.toggle-off .toggle-radio:first-child {
         left: -120%; }
   .toggle .toggle-radio {
-    background: url("../img/toggle/icon-on.png") right top no-repeat;
+    /*background: url("../img/toggle/icon-on.png") right top no-repeat;*/
     color: #1abc9c;
     display: block;
     font-weight: 700;
