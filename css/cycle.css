@@ -1,0 +1,77 @@
+#cycle {
+    width: 1215px;
+    height: 701px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+}
+.cycleText {
+    width: 1215px;
+    height: 701px;
+    position: relative;
+    z-index: 0;
+}
+#creation:hover {
+    cursor: pointer;
+}
+#traitement:hover {
+    cursor: pointer;
+}
+#miseDispo:hover {
+    cursor: pointer;
+}
+#reutil:hover {
+    cursor: pointer;
+}
+
+.Txtcadre {
+    position: absolute;
+    top: 152.5px;
+    left: 429.5px;
+    width: 310.5px;
+    height: 305.5px;
+    display: table;
+    overflow: hidden;
+    text-align:left;
+}
+.Txtcadre  p{
+    padding-left: 25.5px;
+    text-indent: -10px;
+}
+.Txtcadre  h2{
+    font-size: 60px;margin-bottom: 22.5px;
+    line-height: 60px;
+}
+
+.texteBulle1 {
+    position: absolute;
+    top: 87px;
+    left: 889px;
+    width: 233.5px;
+    height: 126px;
+    padding: 18px 13.5px;
+    color: #c0392b;
+}
+.texteBulle2 {
+    position: absolute;
+    top: 503px;
+    left: 889px;
+    width: 251.5px;
+    height: 126px;
+    padding: 18px 13.5px;
+    color: #c0392b;
+}
+.texteBulle3 {
+    position: absolute;
+    top: 436px;
+    left: 7px;
+    width: 269.5px;
+    height: 193px;
+    padding: 13.5px 13.5px;
+    color: #c0392b;
+}
+
+[class$=texte] { 
+    display: table-cell; vertical-align: middle;
+}​

@@ -35,6 +35,7 @@
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/flat-ui.css">
         <link rel="stylesheet" href="css/etic-opendata.css">
+		<link rel="stylesheet" href="css/cycle.css">
         <!--<!(endif)-->
 
         <!--(if target dist)>
@@ -79,12 +80,53 @@
         <!-- FRAME 5 -->
 
         <div class="frame" id="frame05">
-            <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit ?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-            <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit ?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-            <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit ?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+            <h2>Cycle de vie des données</h2>
+            <p>La société moderne repose sur cette notion qui, il n’y a pas encore si longtemps que ça, était encore abstraite : la donnée, l’information. Nous en produisons tous les jours, de la simple personne à l’entreprise, qu’on le veuille ou non. Celle-ci lorsqu’elle nous est présentée peut sembler évidente : la température en un lieu, le nombre d’habitants d’un pays, ou les horaires de passages d’un bus. Pourtant celle-ci est la source d’une multitude d’activités, qui viennent l'exploiter en masse pour en produire de la richesse. </p>
+
+
+            <div class='cycleText'>
+                <div id="cycle"> <!-- Fallback Text Content can go here --> </div>
+                <div class="Txtcadre">
+                    <div class="creation-texte">
+                        <h2 style="font-size: 60px;margin-bottom: 25px;">Création</h2>
+                        <p><i class="icon-chevron-sign-right"></i> Données de l'Etat</p>
+                        <p><i class="icon-chevron-sign-right"></i> Données des collectivités</p>
+                    </div>
+                    <div class="traitement-texte">
+                        <h2 style="font-size: 60px;margin-bottom: 25px;">Traitements</h2>
+                        <p><i class="icon-chevron-sign-right"></i> Format : compatible et adapté à un traitement de l’information</p>
+                        <p><i class="icon-chevron-sign-right"></i> Anonymisation</p>
+                    </div>
+                    <div class="miseDispo-texte">
+                        <h2 style="font-size: 60px;margin-bottom: 25px;">Mise à disposition</h2>
+                        <p><i class="icon-chevron-sign-right"></i>   Le choix d'une infrasctructure</p>
+                        <p><i class="icon-chevron-sign-right"></i> Licences</p>
+                    </div>
+                    <div class="reutil-texte">
+                        <h2 style="font-size: 60px;margin-bottom: 25px;">Ré-utilisation</h2>
+                        <p><i class="icon-chevron-sign-right"></i> Emergence de services, transparence de l’état</p>
+                        <p><i class="icon-chevron-sign-right"></i> Nouveau modèle de développement</p>
+                    </div>
+                </div>
+                <div class="texteBulle1">
+                    <p><i class="icon-money"></i> Anonymisation</p>
+                    <p><i class="icon-money"></i> Main d'oeuvre</p>
+                </div>
+                <div class="texteBulle2">
+                    <p><i class="icon-money"></i> Hébergement (serveurs)</p>
+                    <p><i class="icon-money"></i> Entretiens</p>
+                </div>
+                <div class="texteBulle3">
+                    <p><i class="icon-money"></i> Génération de bénéfices</p>
+                    <p><i class="icon-money"></i> Plusieurs licenses (incompatibles)</p>
+                    <p><i class="icon-money"></i> Coût d'accès aux données</p>
+                </div>
+            </div>
+
+
+            <p>Produire la donnée est la première étape de son cycle de vie, il faut récupérer l’information. Ensuite vient l’utilisation en elle même : on vient lui donner de la valeur. La nouvelle tendance est de ne pas laisser “mourir” la donnée, car bien qu’elle soit produite pour une utilisation précise, sa valeur continue à vivre tant qu’elle peut être réutilisée pour d’autres applications,  surtout lorsque l’on possède une grande quantité de données qui soient de plus variées. C’est ce que l’on appel l’open data.</p> 
+
+            <p>Un problème se pose cependant. Bien que ce cycle semble simple, la donnée a un coût. Non seulement à sa production, mais également à sa redistribution. En effet, pour pouvoir être utilisée par le plus grand nombre, certaines problématiques peuvent se poser : tout d’abord le fait qu’elle soit exploitable ou non, mais aussi mettre en place l’infrastructure nécessaire à sa redistribution. Également, certaines données sensibles comme celles relatives à la santé donne lieu à des problème d’anonymisation. Ce coût, il faut l’assumer ; l’argent ne tombe pas du ciel. La question est qui doit l’assumer ?</p>
         </div>
 
 
@@ -410,5 +452,6 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+		<script src="js/cycle.js"></script>
     </body>
 </html>
