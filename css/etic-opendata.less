@@ -296,13 +296,14 @@ nav {
 
 		img {
 			float: left;
-			height: 100%;
+			max-width: 20%;
+			margin: 10px;
 		}
 
 		p {
 			color: @cloud;
 			line-height: 1.2em;
-			font-size: 1.2em;
+			font-size: 1.15em;
 		}
 	}
 
@@ -312,12 +313,21 @@ nav {
 		height: 200px;
 		margin-bottom: 10px;
 
+		.actor-img-container {
+			display: table-cell;
+			vertical-align: middle;
+			height: 200px;
+			width: 200px;
+			text-align: center;
+		}
+
 		h3 {
-			position: relative;
-			bottom: 40px;
+			position: absolute;
+			bottom: 0px;
 			padding-left: 10px;
 			width: 100%;
 			background-color: @cloud;
+			margin: 0px;
 			#translucent > .background(@cloud,0.7); 
 		}
 

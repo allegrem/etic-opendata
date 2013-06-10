@@ -101,6 +101,15 @@ categorieToText = (categorie) ->
 		when 'citoyens'
 			'Citoyens'
 
+categorieToShortText = (categorie) ->
+	switch categorie
+		when 'public'
+			'Pub'
+		when 'prive'
+			'Priv'
+		when 'citoyens'
+			'Cit'
+
 positionToText = (position) ->
 	switch position
 		when 'contributeur'
@@ -111,6 +120,17 @@ positionToText = (position) ->
 			'Observateur'
 		when 'reticent'
 			'Réticent'
+
+positionToShortText = (position) ->
+	switch position
+		when 'contributeur'
+			'Contr'
+		when 'reutilisateur'
+			'Réut'
+		when 'observateur'
+			'Obs'
+		when 'reticent'
+			'Rét'
 
 attributeToText = (attribute, value) ->
 	switch attribute
@@ -222,8 +242,8 @@ unpinActorsColumnTitles = () -> actorsDiv.find('h2').removeClass('pin')
 actors.each (i, a) ->
 	$a = $(a)
 	$a.find('h3').append """
-			\ <span class='label label-position'>#{positionToText $a.data 'position'}</span>
-			\ <span class='label label-categorie'>#{categorieToText $a.data 'categorie'}</span>
+			\ <span class='label label-position'>#{positionToShortText $a.data 'position'}</span>
+			\ <span class='label label-categorie'>#{categorieToShortText $a.data 'categorie'}</span>
 		"""
 
 # Create filters

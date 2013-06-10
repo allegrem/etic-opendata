@@ -243,12 +243,13 @@ nav {
 }
 .actors #actor-details img {
   float: left;
-  height: 100%;
+  max-width: 20%;
+  margin: 10px;
 }
 .actors #actor-details p {
   color: #ecf0f1;
   line-height: 1.2em;
-  font-size: 1.2em;
+  font-size: 1.15em;
 }
 .actors .actor {
   background-color: #8e44ad;
@@ -256,12 +257,20 @@ nav {
   height: 200px;
   margin-bottom: 10px;
 }
+.actors .actor .actor-img-container {
+  display: table-cell;
+  vertical-align: middle;
+  height: 200px;
+  width: 200px;
+  text-align: center;
+}
 .actors .actor h3 {
-  position: relative;
-  bottom: 40px;
+  position: absolute;
+  bottom: 0px;
   padding-left: 10px;
   width: 100%;
   background-color: #ecf0f1;
+  margin: 0px;
   background-color: rgba(237, 241, 242, 0.7);
 }
 .actors .actor .label {

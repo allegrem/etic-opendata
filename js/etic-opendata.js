@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, attributeNameToText, attributeToText, categorieToText, createAttributeFilter, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, pinActorsColumnTitles, positionToText, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
+  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, attributeNameToText, attributeToText, categorieToShortText, categorieToText, createAttributeFilter, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, pinActorsColumnTitles, positionToShortText, positionToText, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -151,6 +151,17 @@
     }
   };
 
+  categorieToShortText = function(categorie) {
+    switch (categorie) {
+      case 'public':
+        return 'Pub';
+      case 'prive':
+        return 'Priv';
+      case 'citoyens':
+        return 'Cit';
+    }
+  };
+
   positionToText = function(position) {
     switch (position) {
       case 'contributeur':
@@ -161,6 +172,19 @@
         return 'Observateur';
       case 'reticent':
         return 'Réticent';
+    }
+  };
+
+  positionToShortText = function(position) {
+    switch (position) {
+      case 'contributeur':
+        return 'Contr';
+      case 'reutilisateur':
+        return 'Réut';
+      case 'observateur':
+        return 'Obs';
+      case 'reticent':
+        return 'Rét';
     }
   };
 
@@ -338,7 +362,7 @@
     var $a;
 
     $a = $(a);
-    return $a.find('h3').append("\ <span class='label label-position'>" + (positionToText($a.data('position'))) + "</span>\n\ <span class='label label-categorie'>" + (categorieToText($a.data('categorie'))) + "</span>");
+    return $a.find('h3').append("\ <span class='label label-position'>" + (positionToShortText($a.data('position'))) + "</span>\n\ <span class='label label-categorie'>" + (categorieToShortText($a.data('categorie'))) + "</span>");
   });
 
   createAttributeFilter = function(attribute, attributeList) {
