@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="cycle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1352px" height="780px" viewBox="0 0 1352 780" enable-background="new 0 0 1352 780" xml:space="default">
+
+	 <g transform="translate(546.5,46.5)" id="creation">
+		<path id="creation_ellipse" fill="#24AD5F" stroke="#24AD5F" stroke-width="0"  d="M208.41,63.794c0,34.443-46.318,62.364-103.464,62.364C47.803,126.158,1.48,98.237,1.48,63.794
+		c0-34.442,46.323-62.361,103.465-62.361C162.092,1.433,208.41,29.353,208.41,63.794z"/>
+		<text id="creation_texte" transform="matrix(1 0 0 1 35.4658 78.793)" fill="#ECF0F1" font-family="Lato" font-size="36">Création
+	     </text>
+	</g>
+
+	<g transform="translate(814,120)" id="arrow1">
+		<path fill="none" stroke="#24AD5F" stroke-width="12" stroke-miterlimit="10" d="M2.013,11.714
+			c53.063-7.402,103.715,31.467,123.614,90.407	">
+			<set  fill="remove" attributeName="stroke" end="arrow1.mouseout" from="#24AD5F" to="#c0392b" begin="arrow1.mouseover" restart="always" />
+		</path>
+		<polygon fill="#24AD5F" points="132.812,132.642 104.677,94.097 124.719,99.935 139.717,85.426 	">
+			<set  fill="remove" attributeName="fill" end="arrow1.mouseout" from="#24AD5F" to="#c0392b" begin="arrow1.mouseover" restart="always" />
+		</polygon>
+	</g>
+
+	<g transform="translate(850.5,304.5)" id="traitement">
+		<path id="traitement_ellipse" fill="#24AD5F" stroke="#24AD5F" stroke-width="0"  d="M242.047,66.637c0,36.005-53.934,65.197-120.472,65.197c-66.54,0-120.473-29.191-120.473-65.197
+	c0-36.008,53.933-65.197,120.473-65.197C188.113,1.44,242.047,30.629,242.047,66.637z" />
+		<text id="traitement_texte" transform="matrix(1 0 0 1 35.4658 78.793)" fill="#ECF0F1" font-family="Lato" font-size="36">Traitement
+	     </text>
+	</g>
+
+	<g transform="translate(831,522)" id="arrow2">
+		<path fill="none" stroke="#24AD5F" stroke-width="12" stroke-miterlimit="10" d="M139.574,4.448
+			c0,53.577-45.494,98.373-106.618,109.938">
+			<set  fill="remove" attributeName="stroke" end="arrow2.mouseout" from="#24AD5F" to="#c0392b" begin="arrow2.mouseover" restart="always" />
+		</path>
+		<polygon fill="#24AD5F"  points="1.735,117.286 43.797,94.746 35.246,113.787 47.545,130.647 			">
+			<set  fill="remove" attributeName="fill" end="arrow2.mouseout" from="#24AD5F" to="#c0392b" begin="arrow2.mouseover" restart="always" />
+		</polygon>
+	</g>
+
+	<g transform="translate(524,562)" id="miseDispo">
+		<path id="miseDispo_ellipse" fill="#24AD5F" stroke="#24AD5F" stroke-width="0"  d="M248.252,82.897c0,45.4-55.203,82.205-123.307,82.205c-68.1,0-123.307-36.805-123.307-82.205
+	S56.845,0.692,124.945,0.692C193.049,0.692,248.252,37.497,248.252,82.897z" />
+		<text id="miseDispo_texte" transform="matrix(1 0 0 1 70.9336 70.6265)" fill="#ECF0F1" font-family="Lato" font-size="36">
+			<tspan x="0" y="0">Mise à </tspan><tspan x="-35.171" y="43.2">disposition</tspan>
+	     </text>
+	</g>
+
+	<g transform="translate(352,500)" id="arrow3">
+		<path fill="none" stroke="#24AD5F" stroke-width="12" stroke-miterlimit="10"  d="M134.683,135.111
+			C81.279,139.425,32.968,97.685,16.521,37.69">
+			<set  fill="remove" attributeName="stroke" end="arrow3.mouseout" from="#24AD5F" to="#c0392b" begin="arrow3.mouseover" restart="always" />
+		</path>
+		<polygon fill="#24AD5F"  points="11.117,6.805 36.97,46.915 17.302,39.925 1.486,53.541 			">
+			<set  fill="remove" attributeName="fill" end="arrow3.mouseout" from="#24AD5F" to="#c0392b" begin="arrow3.mouseover" restart="always" />
+		</polygon>
+	</g>
+
+	<g transform="translate(196,301)" id="reutil">
+		<ellipse id="reutil_ellipse" fill="#24AD5F" stroke="#24AD5F" stroke-width="0"  cx="127.315" cy="69.638" rx="126.142" ry="68.032" />
+		<text id="reutil_texte" fill="#ECF0F1" font-family="Lato" font-size="36" x="27px" y="82px">Réutilisation
+	     </text>
+	</g>
+
+	<text transform="translate(500,301)"  fill="#24AD5F" font-family="Lato Bold, Lato" font-size="96" id="texteDefault">
+			<tspan x="0" y="0">Cycle</tspan><tspan x="0" y="90">des</tspan><tspan x="0" y="180">données</tspan>
+			<animate attributeName="font-size" from="10" to="96" dur="2s"/>
+	</text>
+	 
+	<g transform="translate(986,94)"  id="bulle1">
+		<rect x="5" y="6" rx="20" ry="20" width="260.29px" height="139.94px" style="fill:none;stroke:#c0392b;stroke-width:9"/>
+		<circle fill="#FFFFFF" stroke="#c0392b" stroke-width="4" cx="21.045" cy="142.372" r="13.535"/>
+		<circle fill="#FFFFFF" stroke="#c0392b" stroke-width="4" cx="51.573" cy="144.455" r="13.535"/>
+	</g>
+
+	<g transform="translate(986,546)"  id="bulle2">
+		<rect x="5" y="16" rx="20" ry="20" width="315.29px" height="139.94px" style="fill:none;stroke:#c0392b;stroke-width:9" />
+		<circle fill="#FFFFFF" stroke="#c0392b" stroke-width="4"  cx="21.045" cy="18.889" r="13.535"/>
+		<circle fill="#FFFFFF"  stroke="#c0392b" stroke-width="4" cx="51.573" cy="16.805" r="13.535"/>
+	</g>
+
+	<g transform="translate(5,468)"  id="bulle3">
+		<rect x="5" y="16" rx="20" ry="20" width="320.29px" height="239.94px" style="fill:none;stroke:#c0392b;stroke-width:9"/>
+		<circle fill="#FFFFFF" stroke="#c0392b" stroke-width="4" cx="288.171" cy="18.889" r="13.535"/>
+		<circle fill="#FFFFFF" stroke="#c0392b" stroke-width="4" cx="257.643" cy="16.805" r="13.535"/>
+	</g>
+</svg>
