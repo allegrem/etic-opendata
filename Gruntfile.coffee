@@ -48,7 +48,7 @@ module.exports = (grunt) ->
           banner: '<%= meta.banner %>'
           report: 'min'
         files:
-          '<%= meta.dist.path %><%= pkg.name %>.min.css': [ '<%= meta.dev.csspath %>/*.css', 
+          '<%= meta.dist.csspath %><%= pkg.name %>.min.css': [ '<%= meta.dev.csspath %>/*.css', 
                                                             '!<%= meta.dev.csspath %><%= pkg.name %>.css', 
                                                             '<%= meta.dev.csspath %><%= pkg.name %>.css']
 
