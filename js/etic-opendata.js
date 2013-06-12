@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, allLegalDetails, attributeNameToText, attributeToText, categorieToShortText, categorieToText, createAttributeFilter, hideActorsNav, hideDetails, hideLabels, hideLegalDetails, hideTlNav, initAttributeView, label, labelInitialWidth, legal, listDataAttribute, mainNav, pinActorsColumnTitles, positionToShortText, positionToText, showActorsNav, showDetails, showLabels, showLegalDetails, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
+  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, allLegalDetails, attributeNameToText, attributeToText, carteActeurs, carteArguments, categorieToShortText, categorieToText, createAttributeFilter, fadeSvg, hideActorsNav, hideDetails, hideLabels, hideLegalDetails, hideMapNav, hideTlNav, initAttributeView, label, labelInitialWidth, legal, listDataAttribute, mainNav, mapNav, pinActorsColumnTitles, positionToShortText, positionToText, showActorsNav, showDetails, showLabels, showLegalDetails, showMapNav, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -20,6 +20,64 @@
     $('nav li').removeClass('selected');
     return $("nav a[href=" + anchor + "]").parent().addClass('selected');
   };
+
+  carteActeurs = $("#carte-acteurs");
+
+  carteArguments = $("#carte-arguments");
+
+  carteActeurs.css({
+    position: 'absolute',
+    top: carteArguments.position().top - 40,
+    left: 0,
+    opacity: 0
+  });
+
+  mapNav = $(".map nav");
+
+  showMapNav = function() {
+    return mapNav.stop().animate({
+      right: '0'
+    }, 700).removeClass('hidden');
+  };
+
+  hideMapNav = function(hide) {
+    var time;
+
+    if (hide == null) {
+      hide = false;
+    }
+    time = hide ? 0 : 700;
+    return mapNav.stop().animate({
+      right: "-" + (mapNav.width() + 50) + "px"
+    }, time).addClass('hidden');
+  };
+
+  $(document).ready(function() {
+    return hideMapNav(true);
+  });
+
+  fadeSvg = function(obj, step) {
+    var count, i;
+
+    count = 0;
+    return i = setInterval(function() {
+      obj.css('opacity', obj.css('opacity') - step);
+      count++;
+      if (count > 11) {
+        return clearInterval(i);
+      }
+    }, 1);
+  };
+
+  $('#mapArgumentsBtn').click(function() {
+    fadeSvg(carteActeurs, -0.08);
+    return fadeSvg(carteArguments, 0.08);
+  });
+
+  $('#mapActorsBtn').click(function() {
+    fadeSvg(carteActeurs, 0.08);
+    return fadeSvg(carteArguments, -0.08);
+  });
 
   $(".cycleText").tooltip({
     title: "Survolez une bulle ou une flèche pour faire apparaitre les points chauds de la controverse.",
@@ -510,11 +568,12 @@
   actorsDiv.find('#actorsSelectAttributes .filter-categorie').hide();
 
   $(window).scroll(function(e) {
-    var firstActorTitle, offset05, offset07, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;
+    var firstActorTitle, offset05, offset07, offset09, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;
 
     scrollTop = $(this).scrollTop();
     offset05 = $('#frame05').offset().top - 5;
     offset07 = $('#frame07').offset().top - 5;
+    offset09 = $('#frame09').offset().top - 5;
     offset10 = $('#frame10').offset().top - 5;
     offset15 = $('#frame15').offset().top - 5;
     offset20 = $('#frame20').offset().top - 5;
@@ -539,6 +598,11 @@
         left: '0px'
       }, 1000).removeClass('hidden');
       setTimeout(hideLabels, 5000);
+    }
+    if (((offset09 - $(window).height() * 0.05) < scrollTop && scrollTop < (offset10 - $(window).height() * 0.3)) && mapNav.hasClass('hidden')) {
+      showMapNav();
+    } else if ((scrollTop < (offset09 - $(window).height() * 0.05) || scrollTop > (offset10 - $(window).height() * 0.3)) && !mapNav.hasClass('hidden')) {
+      hideMapNav();
     }
     if (((offset15 - $(window).height() * 0.05) < scrollTop && scrollTop < (offset20 - $(window).height() * 0.3)) && tlNav.hasClass('hidden')) {
       showTlNav();

@@ -17,6 +17,41 @@ activateNavItem = (anchor) ->
 
 
 ###########################################################################################
+#										  MAPS
+###########################################################################################
+
+# Move the second map
+carteActeurs = $("#carte-acteurs")
+carteArguments = $("#carte-arguments")
+carteActeurs.css({position: 'absolute', top: carteArguments.position().top-40, left: 0, opacity: 0})
+
+# Show and hide the nav
+mapNav = $(".map nav")
+showMapNav = () -> mapNav.stop().animate(right: '0', 700).removeClass('hidden')
+hideMapNav = (hide = false) -> 
+	time = if hide then 0 else 700
+	mapNav.stop().animate(right: "-#{mapNav.width()+50}px", time).addClass('hidden')
+$(document).ready -> hideMapNav(true)
+
+# Change maps
+fadeSvg = (obj, step) ->
+	count = 0
+	i = setInterval(->
+			obj.css 'opacity', obj.css('opacity') - step
+			count++
+			clearInterval i  if (count > 11)
+		, 1)
+
+$('#mapArgumentsBtn').click () -> 
+	fadeSvg carteActeurs, -0.08
+	fadeSvg carteArguments, 0.08
+$('#mapActorsBtn').click () -> 
+	fadeSvg carteActeurs, 0.08
+	fadeSvg carteArguments, -0.08
+
+
+
+###########################################################################################
 #										TOOLTIPS
 ###########################################################################################
 
@@ -72,6 +107,8 @@ $(".legal h3").tooltip(
 .click -> $(".legal h3").tooltip('destroy')
 
 
+
+
 ###########################################################################################
 #										MAIN NAV
 ###########################################################################################
@@ -91,6 +128,8 @@ hideLabels = () ->
 		.animate(width: '0px', 700, () -> $(this).css('margin-left', '0px'))
 mainNav.mouseenter showLabels
 mainNav.mouseleave hideLabels
+
+
 
 
 ###########################################################################################
@@ -374,6 +413,7 @@ $(window).scroll (e) ->
 	# Cache some values (the '-5' is a security margin)
 	offset05 = $('#frame05').offset().top - 5
 	offset07 = $('#frame07').offset().top - 5
+	offset09 = $('#frame09').offset().top - 5
 	offset10 = $('#frame10').offset().top - 5
 	offset15 = $('#frame15').offset().top - 5
 	offset20 = $('#frame20').offset().top - 5
@@ -399,6 +439,12 @@ $(window).scroll (e) ->
 	if scrollTop > offset05 and mainNav.hasClass 'hidden'
 		mainNav.stop().animate(left: '0px', 1000).removeClass('hidden')
 		setTimeout hideLabels, 5000
+
+	# Show and hide the map menu when we are on the map
+	if (offset09 - $(window).height() * 0.05) < scrollTop < (offset10 - $(window).height() * 0.3) and mapNav.hasClass 'hidden'
+		showMapNav()
+	else if (scrollTop < (offset09 - $(window).height() * 0.05) or scrollTop > (offset10 - $(window).height() * 0.3)) and !mapNav.hasClass 'hidden'
+		hideMapNav()
 
 	# Show and hide the timeline menu when we are on the timeline
 	if (offset15 - $(window).height() * 0.05) < scrollTop < (offset20 - $(window).height() * 0.3) and tlNav.hasClass 'hidden'

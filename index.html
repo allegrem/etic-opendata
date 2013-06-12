@@ -159,8 +159,19 @@
 
         <!-- FRAME 09 -->
 
-        <div class="frame" id="frame09">
+        <div class="frame map" id="frame09">
+            <nav>
+                <p>Afficher</p>
+                <div class="toggle">
+                    <label class="toggle-radio" for="mapArgumentsBtn">ARGUMENTS <i class="icon-circle"></i></label>
+                    <input id="mapArgumentsBtn" type="radio" checked="checked">
+                    <label class="toggle-radio" for="mapActorsBtn"><i class="icon-circle"></i> ACTEURS</label>
+                    <input id="mapActorsBtn" type="radio">
+                </div>
+            </nav>
 
+            <object data="img/carte-arguments.svg" type="image/svg+xml" id="carte-arguments"></object>
+            <object data="img/carte-acteurs.svg" type="image/svg+xml" id="carte-acteurs"></object>
         </div>
 
 
