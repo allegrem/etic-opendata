@@ -104,7 +104,7 @@ nav {
 .frame h1 {
   font-size: 7em;
   margin-bottom: 0.8em;
-  line-height: 0.8em;
+  line-height: 0.9em;
 }
 .frame .main-icon {
   font-size: 13em;
@@ -312,9 +312,12 @@ nav {
   position: absolute;
   bottom: 0px;
   padding-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
   width: 100%;
   background-color: #ecf0f1;
   margin: 0px;
+  line-height: 0.9em;
   background-color: rgba(237, 241, 242, 0.7);
 }
 .actors .actor .label {
