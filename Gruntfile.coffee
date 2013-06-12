@@ -84,7 +84,7 @@ module.exports = (grunt) ->
         files: [
           expand: true
           cwd: '<%= meta.dev.jspath %>'
-          src: ['*.min.js']
+          src: ['*.min.js', 'cycle.js']
           dest: '<%= meta.dist.jspath %>'
         ]
 
