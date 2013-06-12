@@ -21,6 +21,17 @@
     return $("nav a[href=" + anchor + "]").parent().addClass('selected');
   };
 
+  $(".cycleText").tooltip({
+    title: "Survolez une bulle ou une flèche pour faire apparaitre les points chauds de la controverse."
+  }, {
+    container: "body"
+  }).tooltip('hide');
+
+  $(".timeline").tooltip({
+    title: "Cliquez sur une date pour révéler plus de détails.",
+    container: 'body'
+  }).tooltip('hide');
+
   mainNav = $('nav.main-nav');
 
   mainNav.css('left', "-" + (mainNav.width() + 10) + "px").addClass('hidden');

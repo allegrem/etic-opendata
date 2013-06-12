@@ -17,6 +17,19 @@ activateNavItem = (anchor) ->
 
 
 ###########################################################################################
+#										TOOLTIPS
+###########################################################################################
+
+# Data life
+$(".cycleText").tooltip(title: "Survolez une bulle ou une flèche pour faire apparaitre les points chauds de la controverse.", 
+	container: "body")
+.tooltip('hide')
+
+# Timeline
+$(".timeline").tooltip(title: "Cliquez sur une date pour révéler plus de détails.", container: 'body').tooltip('hide')
+
+
+###########################################################################################
 #										MAIN NAV
 ###########################################################################################
 
