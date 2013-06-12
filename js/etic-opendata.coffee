@@ -60,34 +60,35 @@ $(".cycleText").tooltip(
 	title: "Survolez une bulle ou une flèche pour faire apparaitre les points chauds de la controverse."
 	container: 'body'
 	placement: 'top')
-.tooltip('hide')
+
+# Maps
+$(".map nav").tooltip(
+	title: "Cliquez pour basculer entre la carte des arguments et la carte des acteurs."
+	container: 'body'
+	placement: 'bottom')
 
 # Timeline
 $(".timeline h3").tooltip(
 	title: "Cliquez sur une date pour révéler plus de détails."
 	container: 'body'
 	placement: 'right')
-.tooltip('hide')
 .click -> $(".timeline h3").tooltip('destroy')
 
 $(".timeline nav").tooltip(
 	title: "Cliquez ici pour désactiver l'affichage condensé et révéler tous les détails."
 	container: 'body'
 	placement: 'bottom')
-.tooltip('hide')
 
 # Actors
 $("#actorsViewChoice").tooltip(
 	title: "Cliquez ici pour basculer vers l'affichage des acteurs par position dans la controverse."
 	container: 'body'
 	placement: 'bottom')
-.tooltip('hide')
 
 $("#actorsSelectAttributes").tooltip(
 	title: "Cliquez sur les différents boutons pour n'afficher que les catégories qui vous intéressent."
 	container: 'body'
 	placement: 'bottom')
-.tooltip('hide')
 
 $(document).ready ->
 	$(".actors > .actor:first").tooltip(
@@ -102,8 +103,7 @@ $(document).ready ->
 $(".legal h3").tooltip(
 	title: "Cliquez sur le titre d'une section pour révéler plus de détails."
 	container: 'body'
-	placement: 'bottom')
-.tooltip('hide')
+	placement: 'right')
 .click -> $(".legal h3").tooltip('destroy')
 
 
@@ -441,21 +441,21 @@ $(window).scroll (e) ->
 		setTimeout hideLabels, 5000
 
 	# Show and hide the map menu when we are on the map
-	if (offset09 - $(window).height() * 0.05) < scrollTop < (offset10 - $(window).height() * 0.3) and mapNav.hasClass 'hidden'
+	if (offset09 - $(window).height() * 0.15) < scrollTop < (offset10 - $(window).height() * 0.3) and mapNav.hasClass 'hidden'
 		showMapNav()
-	else if (scrollTop < (offset09 - $(window).height() * 0.05) or scrollTop > (offset10 - $(window).height() * 0.3)) and !mapNav.hasClass 'hidden'
+	else if (scrollTop < (offset09 - $(window).height() * 0.15) or scrollTop > (offset10 - $(window).height() * 0.3)) and !mapNav.hasClass 'hidden'
 		hideMapNav()
 
 	# Show and hide the timeline menu when we are on the timeline
-	if (offset15 - $(window).height() * 0.05) < scrollTop < (offset20 - $(window).height() * 0.3) and tlNav.hasClass 'hidden'
+	if (offset15 - $(window).height() * 0.15) < scrollTop < (offset20 - $(window).height() * 0.3) and tlNav.hasClass 'hidden'
 		showTlNav()
-	else if (scrollTop < (offset15 - $(window).height() * 0.05) or scrollTop > (offset20 - $(window).height() * 0.3)) and !tlNav.hasClass 'hidden'
+	else if (scrollTop < (offset15 - $(window).height() * 0.15) or scrollTop > (offset20 - $(window).height() * 0.3)) and !tlNav.hasClass 'hidden'
 		hideTlNav()
 
 	# Show and hide the actors menu when we are on the timeline
-	if (offset25 - $(window).height() * 0.05) < scrollTop < (offset30 - $(window).height() * 0.3) and actorsNav.hasClass 'hidden'
+	if (offset25 - $(window).height() * 0.15) < scrollTop < (offset30 - $(window).height() * 0.3) and actorsNav.hasClass 'hidden'
 		showActorsNav()
-	else if (scrollTop < (offset25 - $(window).height() * 0.05) or scrollTop > (offset30 - $(window).height() * 0.3)) and !actorsNav.hasClass 'hidden'
+	else if (scrollTop < (offset25 - $(window).height() * 0.15) or scrollTop > (offset30 - $(window).height() * 0.3)) and !actorsNav.hasClass 'hidden'
 		hideActorsNav()
 
 	# Pin the actors column titles 

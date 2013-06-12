@@ -83,13 +83,19 @@
     title: "Survolez une bulle ou une flèche pour faire apparaitre les points chauds de la controverse.",
     container: 'body',
     placement: 'top'
-  }).tooltip('hide');
+  });
+
+  $(".map nav").tooltip({
+    title: "Cliquez pour basculer entre la carte des arguments et la carte des acteurs.",
+    container: 'body',
+    placement: 'bottom'
+  });
 
   $(".timeline h3").tooltip({
     title: "Cliquez sur une date pour révéler plus de détails.",
     container: 'body',
     placement: 'right'
-  }).tooltip('hide').click(function() {
+  }).click(function() {
     return $(".timeline h3").tooltip('destroy');
   });
 
@@ -97,19 +103,19 @@
     title: "Cliquez ici pour désactiver l'affichage condensé et révéler tous les détails.",
     container: 'body',
     placement: 'bottom'
-  }).tooltip('hide');
+  });
 
   $("#actorsViewChoice").tooltip({
     title: "Cliquez ici pour basculer vers l'affichage des acteurs par position dans la controverse.",
     container: 'body',
     placement: 'bottom'
-  }).tooltip('hide');
+  });
 
   $("#actorsSelectAttributes").tooltip({
     title: "Cliquez sur les différents boutons pour n'afficher que les catégories qui vous intéressent.",
     container: 'body',
     placement: 'bottom'
-  }).tooltip('hide');
+  });
 
   $(document).ready(function() {
     return $(".actors > .actor:first").tooltip({
@@ -125,8 +131,8 @@
   $(".legal h3").tooltip({
     title: "Cliquez sur le titre d'une section pour révéler plus de détails.",
     container: 'body',
-    placement: 'bottom'
-  }).tooltip('hide').click(function() {
+    placement: 'right'
+  }).click(function() {
     return $(".legal h3").tooltip('destroy');
   });
 
@@ -599,19 +605,19 @@
       }, 1000).removeClass('hidden');
       setTimeout(hideLabels, 5000);
     }
-    if (((offset09 - $(window).height() * 0.05) < scrollTop && scrollTop < (offset10 - $(window).height() * 0.3)) && mapNav.hasClass('hidden')) {
+    if (((offset09 - $(window).height() * 0.15) < scrollTop && scrollTop < (offset10 - $(window).height() * 0.3)) && mapNav.hasClass('hidden')) {
       showMapNav();
-    } else if ((scrollTop < (offset09 - $(window).height() * 0.05) || scrollTop > (offset10 - $(window).height() * 0.3)) && !mapNav.hasClass('hidden')) {
+    } else if ((scrollTop < (offset09 - $(window).height() * 0.15) || scrollTop > (offset10 - $(window).height() * 0.3)) && !mapNav.hasClass('hidden')) {
       hideMapNav();
     }
-    if (((offset15 - $(window).height() * 0.05) < scrollTop && scrollTop < (offset20 - $(window).height() * 0.3)) && tlNav.hasClass('hidden')) {
+    if (((offset15 - $(window).height() * 0.15) < scrollTop && scrollTop < (offset20 - $(window).height() * 0.3)) && tlNav.hasClass('hidden')) {
       showTlNav();
-    } else if ((scrollTop < (offset15 - $(window).height() * 0.05) || scrollTop > (offset20 - $(window).height() * 0.3)) && !tlNav.hasClass('hidden')) {
+    } else if ((scrollTop < (offset15 - $(window).height() * 0.15) || scrollTop > (offset20 - $(window).height() * 0.3)) && !tlNav.hasClass('hidden')) {
       hideTlNav();
     }
-    if (((offset25 - $(window).height() * 0.05) < scrollTop && scrollTop < (offset30 - $(window).height() * 0.3)) && actorsNav.hasClass('hidden')) {
+    if (((offset25 - $(window).height() * 0.15) < scrollTop && scrollTop < (offset30 - $(window).height() * 0.3)) && actorsNav.hasClass('hidden')) {
       showActorsNav();
-    } else if ((scrollTop < (offset25 - $(window).height() * 0.05) || scrollTop > (offset30 - $(window).height() * 0.3)) && !actorsNav.hasClass('hidden')) {
+    } else if ((scrollTop < (offset25 - $(window).height() * 0.15) || scrollTop > (offset30 - $(window).height() * 0.3)) && !actorsNav.hasClass('hidden')) {
       hideActorsNav();
     }
     firstActorTitle = actorsDiv.find('h2').first();
