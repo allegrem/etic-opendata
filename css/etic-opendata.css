@@ -169,6 +169,9 @@ nav {
 #frame40 {
   background-color: #e67e22;
 }
+#frame40 .btn {
+  background-color: #f39c12;
+}
 #frame45 {
   color: #e67e22;
 }
