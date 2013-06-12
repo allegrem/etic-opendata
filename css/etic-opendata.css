@@ -104,6 +104,7 @@ nav {
 .frame h1 {
   font-size: 7em;
   margin-bottom: 0.8em;
+  line-height: 0.8em;
 }
 .frame .main-icon {
   font-size: 13em;
@@ -143,14 +144,23 @@ nav {
 #frame05 {
   color: #27ae60;
 }
-#frame10 {
+#frame07 {
   background-color: #16a085;
 }
-#frame10 .btn {
+#frame07 .btn {
   background-color: #1abc9c;
 }
-#frame15 {
+#frame09 {
   color: #16a085;
+}
+#frame10 {
+  background-color: #2980b9;
+}
+#frame10 .btn {
+  background-color: #3498db;
+}
+#frame15 {
+  color: #2980b9;
 }
 #frame20 {
   background-color: #8e44ad;
@@ -204,13 +214,13 @@ nav {
   padding-right: 30px;
 }
 .timeline nav .toggle label {
-  background-color: #16a085;
+  background-color: #2980b9;
 }
 .timeline h2 {
   float: left;
   width: 10%;
   color: #ecf0f1;
-  background-color: #16a085;
+  background-color: #2980b9;
   text-align: center;
   clear: both;
 }

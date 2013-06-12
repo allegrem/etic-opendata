@@ -330,6 +330,7 @@ $(window).scroll (e) ->
 
 	# Cache some values (the '-5' is a security margin)
 	offset05 = $('#frame05').offset().top - 5
+	offset07 = $('#frame07').offset().top - 5
 	offset10 = $('#frame10').offset().top - 5
 	offset15 = $('#frame15').offset().top - 5
 	offset20 = $('#frame20').offset().top - 5
@@ -338,8 +339,10 @@ $(window).scroll (e) ->
 	offset40 = $('#frame40').offset().top - 5
 
 	# Update the active item in the nav menu
-	if scrollTop < offset10
+	if scrollTop < offset07
 		activateNavItem '#frame00'
+	else if scrollTop < offset10
+		activateNavItem '#frame07'
 	else if scrollTop < offset20
 		activateNavItem '#frame10'
 	else if scrollTop < offset30

@@ -470,18 +470,21 @@
   actorsDiv.find('#actorsSelectAttributes .filter-categorie').hide();
 
   $(window).scroll(function(e) {
-    var firstActorTitle, offset05, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;
+    var firstActorTitle, offset05, offset07, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;
 
     scrollTop = $(this).scrollTop();
     offset05 = $('#frame05').offset().top - 5;
+    offset07 = $('#frame07').offset().top - 5;
     offset10 = $('#frame10').offset().top - 5;
     offset15 = $('#frame15').offset().top - 5;
     offset20 = $('#frame20').offset().top - 5;
     offset25 = $('#frame25').offset().top - 5;
     offset30 = $('#frame30').offset().top - 5;
     offset40 = $('#frame40').offset().top - 5;
-    if (scrollTop < offset10) {
+    if (scrollTop < offset07) {
       activateNavItem('#frame00');
+    } else if (scrollTop < offset10) {
+      activateNavItem('#frame07');
     } else if (scrollTop < offset20) {
       activateNavItem('#frame10');
     } else if (scrollTop < offset30) {
