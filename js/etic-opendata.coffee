@@ -37,6 +37,33 @@ mainNav.mouseenter showLabels
 mainNav.mouseleave hideLabels
 
 
+###########################################################################################
+#										LEGAL
+###########################################################################################
+
+legal = $('.legal')
+allLegalDetails = legal.find('p')
+
+# Hide and show details (take the 'p' elements !!)
+hideLegalDetails = (elements = allLegalDetails, hide = false) -> 
+	$(elements).each (i, el) ->
+		e = $(el)
+		if hide then e.hide() else e.stop().slideUp()
+		e.prev().addClass('hidden')
+showLegalDetails = (elements = allLegalDetails, callback = null) ->
+	$(elements).each (i, el) -> $(el).stop().slideDown(300, callback).prev().removeClass('hidden')
+
+# Show details on click
+legal.find('h3').click (e) -> 
+	hideLegalDetails()
+	$this = $(this)
+	if $this.hasClass('hidden')
+		showLegalDetails $this.next(), -> smoothScrollTo $this
+
+# Hide the details on start
+hideLegalDetails(null, true)
+
+
 
 ###########################################################################################
 #										TIMELINE

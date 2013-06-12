@@ -1,5 +1,4 @@
 $(function(){
-    console.log("pouet");
     $("[class$=texte]").hide();
     $("[class^=texteBulle]").hide();
 
@@ -31,7 +30,6 @@ $(function(){
 });
 function mouseIn(idTag) {
     $("[class$=texte]").hide();
-    console.log("mousein");
     $("#"+idTag+"_ellipse").attr("fill","#ECF0F1");
     $("#"+idTag+"_ellipse").attr("stroke-width","3");
     $("#"+idTag+"_texte").attr("fill","#24AD5F");

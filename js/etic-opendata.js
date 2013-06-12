@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, attributeNameToText, attributeToText, categorieToShortText, categorieToText, createAttributeFilter, hideActorsNav, hideDetails, hideLabels, hideTlNav, initAttributeView, label, labelInitialWidth, listDataAttribute, mainNav, pinActorsColumnTitles, positionToShortText, positionToText, showActorsNav, showDetails, showLabels, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
+  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, allLegalDetails, attributeNameToText, attributeToText, categorieToShortText, categorieToText, createAttributeFilter, hideActorsNav, hideDetails, hideLabels, hideLegalDetails, hideTlNav, initAttributeView, label, labelInitialWidth, legal, listDataAttribute, mainNav, pinActorsColumnTitles, positionToShortText, positionToText, showActorsNav, showDetails, showLabels, showLegalDetails, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -54,6 +54,56 @@
   mainNav.mouseenter(showLabels);
 
   mainNav.mouseleave(hideLabels);
+
+  legal = $('.legal');
+
+  allLegalDetails = legal.find('p');
+
+  hideLegalDetails = function(elements, hide) {
+    if (elements == null) {
+      elements = allLegalDetails;
+    }
+    if (hide == null) {
+      hide = false;
+    }
+    return $(elements).each(function(i, el) {
+      var e;
+
+      e = $(el);
+      if (hide) {
+        e.hide();
+      } else {
+        e.stop().slideUp();
+      }
+      return e.prev().addClass('hidden');
+    });
+  };
+
+  showLegalDetails = function(elements, callback) {
+    if (elements == null) {
+      elements = allLegalDetails;
+    }
+    if (callback == null) {
+      callback = null;
+    }
+    return $(elements).each(function(i, el) {
+      return $(el).stop().slideDown(300, callback).prev().removeClass('hidden');
+    });
+  };
+
+  legal.find('h3').click(function(e) {
+    var $this;
+
+    hideLegalDetails();
+    $this = $(this);
+    if ($this.hasClass('hidden')) {
+      return showLegalDetails($this.next(), function() {
+        return smoothScrollTo($this);
+      });
+    }
+  });
+
+  hideLegalDetails(null, true);
 
   tl = $('.timeline');
 

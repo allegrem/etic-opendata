@@ -171,6 +171,22 @@ nav {
 }
 #frame35 {
   color: #c0392b;
+  width: 64%;
+}
+#frame35 h2 {
+  background-color: #c0392b;
+  color: #ecf0f1;
+  padding: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+  display: inline-block;
+  margin-bottom: 1em;
+}
+#frame35 h3 {
+  margin-top: 1em;
+}
+#frame35 h3:hover {
+  cursor: pointer;
 }
 #frame40 {
   background-color: #e67e22;
@@ -236,7 +252,7 @@ nav {
 .actors h2 {
   background-color: #ecf0f1;
   z-index: 30;
-  width: 100%;
+  width: 20%;
   margin-top: 0;
 }
 .actors h2.pin {
