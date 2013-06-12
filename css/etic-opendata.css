@@ -117,6 +117,9 @@ nav {
 .frame h2:not(:first-of-type) {
   margin-top: 2em;
 }
+.frame .btn {
+  margin-right: 5px;
+}
 #frame00 {
   background-color: #27ae60;
 }
@@ -162,6 +165,9 @@ nav {
 }
 #frame30 {
   background-color: #c0392b;
+}
+#frame30 .btn {
+  background-color: #e74c3c;
 }
 #frame35 {
   color: #c0392b;
