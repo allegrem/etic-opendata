@@ -12,6 +12,7 @@
     height: 701px;
     position: relative;
     z-index: 0;
+    left: -8%;
 }
 #creation:hover {
     cursor: pointer;

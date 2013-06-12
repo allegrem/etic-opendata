@@ -21,12 +21,55 @@ activateNavItem = (anchor) ->
 ###########################################################################################
 
 # Data life
-$(".cycleText").tooltip(title: "Survolez une bulle ou une flèche pour faire apparaitre les points chauds de la controverse.", 
-	container: "body")
+$(".cycleText").tooltip(
+	title: "Survolez une bulle ou une flèche pour faire apparaitre les points chauds de la controverse."
+	container: 'body'
+	placement: 'top')
 .tooltip('hide')
 
 # Timeline
-$(".timeline").tooltip(title: "Cliquez sur une date pour révéler plus de détails.", container: 'body').tooltip('hide')
+$(".timeline h3").tooltip(
+	title: "Cliquez sur une date pour révéler plus de détails."
+	container: 'body'
+	placement: 'right')
+.tooltip('hide')
+.click -> $(".timeline h3").tooltip('destroy')
+
+$(".timeline nav").tooltip(
+	title: "Cliquez ici pour désactiver l'affichage condensé et révéler tous les détails."
+	container: 'body'
+	placement: 'bottom')
+.tooltip('hide')
+
+# Actors
+$("#actorsViewChoice").tooltip(
+	title: "Cliquez ici pour basculer vers l'affichage des acteurs par position dans la controverse."
+	container: 'body'
+	placement: 'bottom')
+.tooltip('hide')
+
+$("#actorsSelectAttributes").tooltip(
+	title: "Cliquez sur les différents boutons pour n'afficher que les catégories qui vous intéressent."
+	container: 'body'
+	placement: 'bottom')
+.tooltip('hide')
+
+$(document).ready ->
+	$(".actors > .actor:first").tooltip(
+		title: "Survolez un acteur pour révéler plus d'informations"
+		container: 'body'
+		placement: 'right',
+		trigger: 'click')
+	.tooltip('show')
+	.mouseleave -> $(".actors .actor").tooltip('destroy')
+
+# Legal
+$(".legal h3").tooltip(
+	title: "Cliquez sur le titre d'une section pour révéler plus de détails."
+	container: 'body'
+	placement: 'bottom')
+.tooltip('hide')
+.click -> $(".legal h3").tooltip('destroy')
 
 
 ###########################################################################################
