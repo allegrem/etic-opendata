@@ -256,7 +256,7 @@
   tl.find('h3').click(function(e) {
     var isClosed;
 
-    if (!$('.toggle').hasClass('toggle-off')) {
+    if (!tl.find('.toggle').hasClass('toggle-off')) {
       isClosed = $(this).hasClass('hidden');
       hideDetails();
       if (isClosed) {

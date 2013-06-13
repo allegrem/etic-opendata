@@ -58,6 +58,7 @@ nav {
   left: 0px;
   top: 75px;
   padding-left: 0px;
+  z-index: 20;
 }
 .main-nav ul {
   list-style-type: none;

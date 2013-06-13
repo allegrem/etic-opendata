@@ -179,7 +179,7 @@ showDetails = (elements = allDetails) ->
 
 # Show details on click
 tl.find('h3').click (e) -> 
-	unless $('.toggle').hasClass('toggle-off')
+	unless tl.find('.toggle').hasClass('toggle-off')
 		isClosed = $(this).hasClass('hidden')
 		hideDetails()
 		showDetails($(this).next()) if isClosed
