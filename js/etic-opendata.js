@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, allLegalDetails, attributeNameToText, attributeToText, carteActeurs, carteArguments, categorieToShortText, categorieToText, createAttributeFilter, currentAttribute, fadeSvg, hideActorsNav, hideDetails, hideLabels, hideLegalDetails, hideMapNav, hideTlNav, initAttributeView, label, labelInitialWidth, legal, listDataAttribute, mainNav, mapNav, pinActorsColumnTitles, positionToShortText, positionToText, showActorsNav, showDetails, showLabels, showLegalDetails, showMapNav, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
+  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, allLegalDetails, attributeNameToText, attributeToText, carteActeurs, carteArguments, categorieToShortText, categorieToText, createAttributeFilter, currentAttribute, fadeSvg, hideActorsNav, hideDetails, hideLabels, hideLegalDetails, hideMapNav, hideTlNav, initAttributeView, label, labelInitialWidth, legal, listDataAttribute, mainNav, mapNav, pinActorsColumnTitles, positionToShortText, positionToText, showActorsNav, showDetails, showLabels, showLegalDetails, showMapNav, showTlNav, smoothScrollTo, tl, tlNav, unlockTooltip, unpinActorsColumnTitles,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -20,6 +20,11 @@
     $('nav li').removeClass('selected');
     return $("nav a[href=" + anchor + "]").parent().addClass('selected');
   };
+
+  $('#frame00 i').click(function() {
+    $('#frame00').toggleClass('unlocked');
+    return $(this).toggleClass('icon-lock icon-unlock-alt');
+  });
 
   carteActeurs = $("#carte-acteurs");
 
@@ -78,6 +83,21 @@
     fadeSvg(carteActeurs, 0.08);
     return fadeSvg(carteArguments, -0.08);
   });
+
+  unlockTooltip = $("#frame00 .main-icon").tooltip({
+    title: "Cliquez pour libérer les données !",
+    container: 'body',
+    placement: 'top',
+    trigger: 'click'
+  });
+
+  unlockTooltip.click(function() {
+    return $(this).tooltip('destroy');
+  });
+
+  setTimeout((function() {
+    return unlockTooltip.tooltip('show');
+  }), 500);
 
   $(".cycleText").tooltip({
     title: "Survolez une bulle ou une flèche pour faire apparaitre les points chauds de la controverse.",

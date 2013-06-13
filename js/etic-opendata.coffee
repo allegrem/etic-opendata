@@ -17,6 +17,16 @@ activateNavItem = (anchor) ->
 
 
 ###########################################################################################
+#										  UNLOCK
+###########################################################################################
+
+$('#frame00 i').click ->
+	$('#frame00').toggleClass 'unlocked'
+	$(this).toggleClass 'icon-lock icon-unlock-alt'
+
+
+
+###########################################################################################
 #										  MAPS
 ###########################################################################################
 
@@ -54,6 +64,15 @@ $('#mapActorsBtn').click () ->
 ###########################################################################################
 #										TOOLTIPS
 ###########################################################################################
+
+# Unlock
+unlockTooltip = $("#frame00 .main-icon").tooltip(
+			title: "Cliquez pour libérer les données !"
+			container: 'body'
+			placement: 'top'
+			trigger: 'click')
+unlockTooltip.click -> $(this).tooltip('destroy')
+setTimeout (-> unlockTooltip.tooltip('show')), 500
 
 # Data life
 $(".cycleText").tooltip(
