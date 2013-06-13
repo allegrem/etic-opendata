@@ -90,15 +90,6 @@ $("#actorsSelectAttributes").tooltip(
 	container: 'body'
 	placement: 'bottom')
 
-$(document).ready ->
-	$(".actors > .actor:first").tooltip(
-		title: "Survolez un acteur pour révéler plus d'informations"
-		container: 'body'
-		placement: 'right',
-		trigger: 'click')
-	.tooltip('show')
-	.mouseleave -> $(".actors .actor").tooltip('destroy')
-
 # Legal
 $(".legal h3").tooltip(
 	title: "Cliquez sur le titre d'une section pour révéler plus de détails."
@@ -397,8 +388,20 @@ createAttributeFilter 'position', actorsPositions
 
 # On load, hide some content and initiate categorie view
 actors.find('p').hide()
-initAttributeView 'categorie', actorsCategories, 0
-hideActorsNav true
+$(document).ready -> 
+	initAttributeView 'categorie', actorsCategories, 0
+	hideActorsNav true
+	setTimeout -> 
+			initAttributeView 'categorie', actorsCategories, 0 #little hack to solve a display bug
+			hideActorsNav true
+			$(".actors > .actor:first").tooltip(
+				title: "Survolez un acteur pour révéler plus d'informations"
+				container: 'body'
+				placement: 'right',
+				trigger: 'click')
+			.tooltip('show')
+			.mouseleave -> $(".actors .actor").tooltip('destroy')
+		, 500
 actorsDetailsTarget.css bottom: $(window).height() * -0.25
 actorsDiv.find('#actorsSelectAttributes .filter-categorie').hide()
 

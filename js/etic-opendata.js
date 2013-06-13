@@ -117,17 +117,6 @@
     placement: 'bottom'
   });
 
-  $(document).ready(function() {
-    return $(".actors > .actor:first").tooltip({
-      title: "Survolez un acteur pour révéler plus d'informations",
-      container: 'body',
-      placement: 'right',
-      trigger: 'click'
-    }).tooltip('show').mouseleave(function() {
-      return $(".actors .actor").tooltip('destroy');
-    });
-  });
-
   $(".legal h3").tooltip({
     title: "Cliquez sur le titre d'une section pour révéler plus de détails.",
     container: 'body',
@@ -563,9 +552,22 @@
 
   actors.find('p').hide();
 
-  initAttributeView('categorie', actorsCategories, 0);
-
-  hideActorsNav(true);
+  $(document).ready(function() {
+    initAttributeView('categorie', actorsCategories, 0);
+    hideActorsNav(true);
+    return setTimeout(function() {
+      initAttributeView('categorie', actorsCategories, 0);
+      hideActorsNav(true);
+      return $(".actors > .actor:first").tooltip({
+        title: "Survolez un acteur pour révéler plus d'informations",
+        container: 'body',
+        placement: 'right',
+        trigger: 'click'
+      }).tooltip('show').mouseleave(function() {
+        return $(".actors .actor").tooltip('destroy');
+      });
+    }, 500);
+  });
 
   actorsDetailsTarget.css({
     bottom: $(window).height() * -0.25
