@@ -152,50 +152,6 @@ hideLegalDetails(null, true)
 
 
 ###########################################################################################
-#										TIMELINE
-###########################################################################################
-
-# Cache some values
-tl = $('.timeline')
-allDetails = tl.children('p')
-
-# Hide and show details (take the 'p' elements !!)
-hideDetails = (elements = allDetails, hide = false) -> 
-	$(elements).each (i, el) ->
-		e = $(el)
-		if hide then e.hide() else e.stop().slideUp()
-		e.prev().addClass('hidden')
-showDetails = (elements = allDetails) ->
-	$(elements).each (i, el) -> $(el).stop().slideDown().prev().removeClass('hidden')
-
-# Show details on click
-tl.find('h3').click (e) -> 
-	unless tl.find('.toggle').hasClass('toggle-off')
-		isClosed = $(this).hasClass('hidden')
-		hideDetails()
-		showDetails($(this).next()) if isClosed
-
-# Enable/Disable condensed view
-$('#tlCondensed1').click () -> 
-	tl.find('h3').css('cursor', 'pointer')
-	smoothScrollTo($('#frame15'), hideDetails)
-$('#tlCondensed2').click () -> 
-	tl.find('h3').css('cursor', 'auto')
-	showDetails()
-		
-# Show and hide the nav
-tlNav = tl.find('nav')
-showTlNav = () -> tlNav.stop().animate(right: '0', 700).removeClass('hidden')
-hideTlNav = (hide = false) -> 
-	time = if hide then 0 else 700
-	tlNav.stop().animate(right: "-#{tlNav.width()+50}px", time).addClass('hidden')
-
-# Hide the details and the nav on start
-hideDetails(null, true)
-hideTlNav(true)
-
-
-###########################################################################################
 #										ACTORS
 ###########################################################################################
 
@@ -203,6 +159,7 @@ hideTlNav(true)
 actorsDiv = $('.actors')
 actorsTarget = actorsDiv.find('.row-fluid')
 actors = actorsDiv.find('.actor')
+currentAttribute = 'categorie'
 
 # Conversion functions for categories and positions
 categorieToText = (categorie) ->
@@ -271,7 +228,9 @@ actorsCategories = listDataAttribute 'categorie', actors
 actorsPositions = listDataAttribute 'position', actors
 
 # Show actors by a given attribute
-initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
+initAttributeView = (attributeName, attributeList, animationDuration = 2000, showNav = true) ->
+	currentAttribute = attributeName
+
 	# Compute some values and remove previous columns
 	attributeListLength = attributeList.length
 	spanValue = Math.ceil 12 / attributeListLength
@@ -322,10 +281,14 @@ initAttributeView = (attributeName, attributeList, animationDuration = 2000) ->
 				break
 
 	# Show the right filter nav
-	$filtersDiv.animate right: "-#{$filtersDiv.width()*1.8}px", ->
-		$filtersDiv.delay(animationDuration / 2).find('div').show()
+	if showNav
+		$filtersDiv.animate right: "-#{$filtersDiv.width()*1.8}px", ->
+			$filtersDiv.delay(animationDuration / 2).find('div').show()
+			$filtersDiv.find(".filter-#{attributeName}").hide()
+			$filtersDiv.animate right: '0px'
+	else
+		$filtersDiv.find('div').show()
 		$filtersDiv.find(".filter-#{attributeName}").hide()
-		$filtersDiv.animate right: '0px'
 
 # Show details of an actor when mouse is hover
 actorsDetailsTarget = actorsDiv.find('#actor-details')
@@ -394,16 +357,63 @@ $(document).ready ->
 	setTimeout -> 
 			initAttributeView 'categorie', actorsCategories, 0 #little hack to solve a display bug
 			hideActorsNav true
-			$(".actors > .actor:first").tooltip(
-				title: "Survolez un acteur pour révéler plus d'informations"
-				container: 'body'
-				placement: 'right',
-				trigger: 'click')
-			.tooltip('show')
-			.mouseleave -> $(".actors .actor").tooltip('destroy')
 		, 500
 actorsDetailsTarget.css bottom: $(window).height() * -0.25
 actorsDiv.find('#actorsSelectAttributes .filter-categorie').hide()
+
+
+
+
+###########################################################################################
+#										TIMELINE
+###########################################################################################
+
+# Cache some values
+tl = $('.timeline')
+allDetails = tl.children('p')
+
+# Hide and show details (take the 'p' elements !!)
+hideDetails = (elements = allDetails, hide = false) -> 
+	$(elements).each (i, el) ->
+		e = $(el)
+		if hide then e.hide() else e.stop().slideUp()
+		e.prev().addClass('hidden')
+showDetails = (elements = allDetails) ->
+	$(elements).each (i, el) -> 
+		$(el).stop()
+			.slideDown(-> 
+				initAttributeView currentAttribute, (if currentAttribute is 'position' then actorsPositions else actorsCategories), 0, false)
+			.prev()
+			.removeClass('hidden')
+
+
+# Show details on click
+tl.find('h3').click (e) -> 
+	unless tl.find('.toggle').hasClass('toggle-off')
+		isClosed = $(this).hasClass('hidden')
+		hideDetails()
+		showDetails($(this).next()) if isClosed
+
+# Enable/Disable condensed view
+$('#tlCondensed1').click () -> 
+	tl.find('h3').css('cursor', 'pointer')
+	smoothScrollTo($('#frame15'), hideDetails)
+$('#tlCondensed2').click () -> 
+	tl.find('h3').css('cursor', 'auto')
+	showDetails()
+		
+# Show and hide the nav
+tlNav = tl.find('nav')
+showTlNav = () -> tlNav.stop().animate(right: '0', 700).removeClass('hidden')
+hideTlNav = (hide = false) -> 
+	time = if hide then 0 else 700
+	tlNav.stop().animate(right: "-#{tlNav.width()+50}px", time).addClass('hidden')
+
+# Hide the details and the nav on start
+hideDetails(null, true)
+hideTlNav(true)
+
+
 
 
 ###########################################################################################

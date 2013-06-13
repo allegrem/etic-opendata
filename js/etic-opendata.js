@@ -1,5 +1,5 @@
 (function() {
-  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, allLegalDetails, attributeNameToText, attributeToText, carteActeurs, carteArguments, categorieToShortText, categorieToText, createAttributeFilter, fadeSvg, hideActorsNav, hideDetails, hideLabels, hideLegalDetails, hideMapNav, hideTlNav, initAttributeView, label, labelInitialWidth, legal, listDataAttribute, mainNav, mapNav, pinActorsColumnTitles, positionToShortText, positionToText, showActorsNav, showDetails, showLabels, showLegalDetails, showMapNav, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
+  var activateNavItem, actors, actorsCategories, actorsDetailsTarget, actorsDiv, actorsNav, actorsPositions, actorsTarget, allDetails, allLegalDetails, attributeNameToText, attributeToText, carteActeurs, carteArguments, categorieToShortText, categorieToText, createAttributeFilter, currentAttribute, fadeSvg, hideActorsNav, hideDetails, hideLabels, hideLegalDetails, hideMapNav, hideTlNav, initAttributeView, label, labelInitialWidth, legal, listDataAttribute, mainNav, mapNav, pinActorsColumnTitles, positionToShortText, positionToText, showActorsNav, showDetails, showLabels, showLegalDetails, showMapNav, showTlNav, smoothScrollTo, tl, tlNav, unpinActorsColumnTitles,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   smoothScrollTo = function(e, callback) {
@@ -209,90 +209,13 @@
 
   hideLegalDetails(null, true);
 
-  tl = $('.timeline');
-
-  allDetails = tl.children('p');
-
-  hideDetails = function(elements, hide) {
-    if (elements == null) {
-      elements = allDetails;
-    }
-    if (hide == null) {
-      hide = false;
-    }
-    return $(elements).each(function(i, el) {
-      var e;
-
-      e = $(el);
-      if (hide) {
-        e.hide();
-      } else {
-        e.stop().slideUp();
-      }
-      return e.prev().addClass('hidden');
-    });
-  };
-
-  showDetails = function(elements) {
-    if (elements == null) {
-      elements = allDetails;
-    }
-    return $(elements).each(function(i, el) {
-      return $(el).stop().slideDown().prev().removeClass('hidden');
-    });
-  };
-
-  tl.find('h3').click(function(e) {
-    var isClosed;
-
-    if (!tl.find('.toggle').hasClass('toggle-off')) {
-      isClosed = $(this).hasClass('hidden');
-      hideDetails();
-      if (isClosed) {
-        return showDetails($(this).next());
-      }
-    }
-  });
-
-  $('#tlCondensed1').click(function() {
-    tl.find('h3').css('cursor', 'pointer');
-    return smoothScrollTo($('#frame15'), hideDetails);
-  });
-
-  $('#tlCondensed2').click(function() {
-    tl.find('h3').css('cursor', 'auto');
-    return showDetails();
-  });
-
-  tlNav = tl.find('nav');
-
-  showTlNav = function() {
-    return tlNav.stop().animate({
-      right: '0'
-    }, 700).removeClass('hidden');
-  };
-
-  hideTlNav = function(hide) {
-    var time;
-
-    if (hide == null) {
-      hide = false;
-    }
-    time = hide ? 0 : 700;
-    return tlNav.stop().animate({
-      right: "-" + (tlNav.width() + 50) + "px"
-    }, time).addClass('hidden');
-  };
-
-  hideDetails(null, true);
-
-  hideTlNav(true);
-
   actorsDiv = $('.actors');
 
   actorsTarget = actorsDiv.find('.row-fluid');
 
   actors = actorsDiv.find('.actor');
+
+  currentAttribute = 'categorie';
 
   categorieToText = function(categorie) {
     switch (categorie) {
@@ -391,12 +314,16 @@
 
   actorsPositions = listDataAttribute('position', actors);
 
-  initAttributeView = function(attributeName, attributeList, animationDuration) {
+  initAttributeView = function(attributeName, attributeList, animationDuration, showNav) {
     var $filtersDiv, actorsColumns, attributeListLength, el, i, spanValue, _i, _ref;
 
     if (animationDuration == null) {
       animationDuration = 2000;
     }
+    if (showNav == null) {
+      showNav = true;
+    }
+    currentAttribute = attributeName;
     attributeListLength = attributeList.length;
     spanValue = Math.ceil(12 / attributeListLength);
     actorsTarget.find("h2, div").remove();
@@ -449,15 +376,20 @@
       }
       return _results;
     });
-    return $filtersDiv.animate({
-      right: "-" + ($filtersDiv.width() * 1.8) + "px"
-    }, function() {
-      $filtersDiv.delay(animationDuration / 2).find('div').show();
-      $filtersDiv.find(".filter-" + attributeName).hide();
+    if (showNav) {
       return $filtersDiv.animate({
-        right: '0px'
+        right: "-" + ($filtersDiv.width() * 1.8) + "px"
+      }, function() {
+        $filtersDiv.delay(animationDuration / 2).find('div').show();
+        $filtersDiv.find(".filter-" + attributeName).hide();
+        return $filtersDiv.animate({
+          right: '0px'
+        });
       });
-    });
+    } else {
+      $filtersDiv.find('div').show();
+      return $filtersDiv.find(".filter-" + attributeName).hide();
+    }
   };
 
   actorsDetailsTarget = actorsDiv.find('#actor-details');
@@ -557,15 +489,7 @@
     hideActorsNav(true);
     return setTimeout(function() {
       initAttributeView('categorie', actorsCategories, 0);
-      hideActorsNav(true);
-      return $(".actors > .actor:first").tooltip({
-        title: "Survolez un acteur pour révéler plus d'informations",
-        container: 'body',
-        placement: 'right',
-        trigger: 'click'
-      }).tooltip('show').mouseleave(function() {
-        return $(".actors .actor").tooltip('destroy');
-      });
+      return hideActorsNav(true);
     }, 500);
   });
 
@@ -574,6 +498,87 @@
   });
 
   actorsDiv.find('#actorsSelectAttributes .filter-categorie').hide();
+
+  tl = $('.timeline');
+
+  allDetails = tl.children('p');
+
+  hideDetails = function(elements, hide) {
+    if (elements == null) {
+      elements = allDetails;
+    }
+    if (hide == null) {
+      hide = false;
+    }
+    return $(elements).each(function(i, el) {
+      var e;
+
+      e = $(el);
+      if (hide) {
+        e.hide();
+      } else {
+        e.stop().slideUp();
+      }
+      return e.prev().addClass('hidden');
+    });
+  };
+
+  showDetails = function(elements) {
+    if (elements == null) {
+      elements = allDetails;
+    }
+    return $(elements).each(function(i, el) {
+      return $(el).stop().slideDown(function() {
+        return initAttributeView(currentAttribute, (currentAttribute === 'position' ? actorsPositions : actorsCategories), 0, false);
+      }).prev().removeClass('hidden');
+    });
+  };
+
+  tl.find('h3').click(function(e) {
+    var isClosed;
+
+    if (!tl.find('.toggle').hasClass('toggle-off')) {
+      isClosed = $(this).hasClass('hidden');
+      hideDetails();
+      if (isClosed) {
+        return showDetails($(this).next());
+      }
+    }
+  });
+
+  $('#tlCondensed1').click(function() {
+    tl.find('h3').css('cursor', 'pointer');
+    return smoothScrollTo($('#frame15'), hideDetails);
+  });
+
+  $('#tlCondensed2').click(function() {
+    tl.find('h3').css('cursor', 'auto');
+    return showDetails();
+  });
+
+  tlNav = tl.find('nav');
+
+  showTlNav = function() {
+    return tlNav.stop().animate({
+      right: '0'
+    }, 700).removeClass('hidden');
+  };
+
+  hideTlNav = function(hide) {
+    var time;
+
+    if (hide == null) {
+      hide = false;
+    }
+    time = hide ? 0 : 700;
+    return tlNav.stop().animate({
+      right: "-" + (tlNav.width() + 50) + "px"
+    }, time).addClass('hidden');
+  };
+
+  hideDetails(null, true);
+
+  hideTlNav(true);
 
   $(window).scroll(function(e) {
     var firstActorTitle, offset05, offset07, offset09, offset10, offset15, offset20, offset25, offset30, offset40, scrollTop;
