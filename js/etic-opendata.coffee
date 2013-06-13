@@ -397,8 +397,13 @@ createAttributeFilter 'position', actorsPositions
 
 # On load, hide some content and initiate categorie view
 actors.find('p').hide()
-initAttributeView 'categorie', actorsCategories, 0
-hideActorsNav true
+$(document).ready -> 
+	initAttributeView 'categorie', actorsCategories, 0
+	hideActorsNav true
+	setTimeout -> 
+			initAttributeView 'categorie', actorsCategories, 0 #little hack to solve a display bug
+			hideActorsNav true
+		, 500
 actorsDetailsTarget.css bottom: $(window).height() * -0.25
 actorsDiv.find('#actorsSelectAttributes .filter-categorie').hide()
 

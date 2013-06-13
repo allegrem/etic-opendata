@@ -563,9 +563,14 @@
 
   actors.find('p').hide();
 
-  initAttributeView('categorie', actorsCategories, 0);
-
-  hideActorsNav(true);
+  $(document).ready(function() {
+    initAttributeView('categorie', actorsCategories, 0);
+    hideActorsNav(true);
+    return setTimeout(function() {
+      initAttributeView('categorie', actorsCategories, 0);
+      return hideActorsNav(true);
+    }, 500);
+  });
 
   actorsDetailsTarget.css({
     bottom: $(window).height() * -0.25
