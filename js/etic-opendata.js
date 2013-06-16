@@ -33,8 +33,9 @@
   carteActeurs.css({
     position: 'absolute',
     top: carteArguments.position().top - 40,
-    left: 0,
-    opacity: 0
+    left: carteArguments.position().left,
+    opacity: 0,
+    width: carteArguments.width()
   });
 
   mapNav = $(".map nav");

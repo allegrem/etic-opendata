@@ -33,7 +33,12 @@ $('#frame00 i').click ->
 # Move the second map
 carteActeurs = $("#carte-acteurs")
 carteArguments = $("#carte-arguments")
-carteActeurs.css({position: 'absolute', top: carteArguments.position().top-40, left: 0, opacity: 0})
+carteActeurs.css
+	position: 'absolute'
+	top: carteArguments.position().top-40
+	left: carteArguments.position().left
+	opacity: 0
+	width: carteArguments.width()
 
 # Show and hide the nav
 mapNav = $(".map nav")
